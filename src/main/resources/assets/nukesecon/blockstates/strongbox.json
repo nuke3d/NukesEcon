@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "nukesecon:block/strongbox",
+      "x": 90
+    },
+    "facing=up": {
+      "model": "nukesecon:block/strongbox",
+      "x": -90
+    },
+    "facing=north": {
+      "model": "nukesecon:block/strongbox"
+    },
+    "facing=south": {
+      "model": "nukesecon:block/strongbox",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "nukesecon:block/strongbox",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "nukesecon:block/strongbox",
+      "y": 90
+    }
+  }
+}

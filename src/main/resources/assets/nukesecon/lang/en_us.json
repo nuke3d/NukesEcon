@@ -1,0 +1,19 @@
+{
+    "item.nukesecon.ironlock": "Iron Lock",
+    "item.nukesecon.woodcoin": "Wood Coin",
+    "item.nukesecon.ironcoin": "Iron Coin",
+    "item.nukesecon.coppercoin": "Copper Coin",
+    "item.nukesecon.goldcoin": "Gold Coin",
+    "item.nukesecon.diamondcoin": "Diamond Coin",
+    "item.nukesecon.emeraldcoin": "Emerald Coin",
+    "block.nukesecon.firstblock": "Strongbox",
+
+    "_comment": "Creative Tabs",
+    "itemGroup.nukesecon": "Nuke's Economy",
+
+    "message.nukesecon.command.test": "Hello world!",
+    "message.streongbox": "Strongbox container. Safely hold your coins!",
+    "message.ironlock": "Iron Lock for StrongBox",
+
+    "screen.nukesecon.strongbox": "StrongBox Screen"
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "nukesecon:block/strongbox",
+    "down": "nukesecon:block/strongbox_top",
+    "up": "nukesecon:block/strongbox_top",
+    "east": "nukesecon:block/strongbox",
+    "west": "nukesecon:block/strongbox",
+    "north": "nukesecon:block/strongbox_front",
+    "south": "nukesecon:block/strongbox"
+  }
+}
