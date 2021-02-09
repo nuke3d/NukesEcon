@@ -36,7 +36,7 @@ public class Config {
     private static void setupStrongBoxConfig(ForgeConfigSpec.Builder SERVER_BUILDER, ForgeConfigSpec.Builder CLIENT_BUILDER) {
         SERVER_BUILDER.comment("StrongBox settings").push(SUBCATEGORY_STRONGBOX);
         STRONGBOX_MAXCOINS = SERVER_BUILDER.comment("Maximum coins per strongbox")
-                .defineInRange("maxPower", 1000000000, 0, Integer.MAX_VALUE);
+                .defineInRange("maxCoins", 1000000000, 0, Integer.MAX_VALUE);
         SERVER_BUILDER.pop();
     }
 

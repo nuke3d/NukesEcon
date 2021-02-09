@@ -13,15 +13,21 @@ import java.util.List;
 
 public class WoodCoin extends Item {
 
+    private static final int defaultValue = 1;
+    private int coinValue;
+
     public WoodCoin() {
         super(new Item.Properties()
                 .maxStackSize(64)
                 .group(ModSetup.ITEM_GROUP));
+        coinValue = defaultValue;
     }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> list, ITooltipFlag flags) {
         list.add(new TranslationTextComponent("message.woodcoin"));
     }
-
+    public int GetCoinValue () {
+        return coinValue;
+    }
 }

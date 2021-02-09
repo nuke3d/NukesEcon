@@ -13,10 +13,14 @@ import java.util.List;
 
 public class EmeraldCoin extends Item {
 
+    private static int defaultValue = 100000;
+    private int coinValue;
+
     public EmeraldCoin() {
-        super(new Properties()
+        super(new Item.Properties()
                 .maxStackSize(64)
                 .group(ModSetup.ITEM_GROUP));
+        coinValue = defaultValue;
     }
 
     @Override
@@ -24,4 +28,7 @@ public class EmeraldCoin extends Item {
         list.add(new TranslationTextComponent("message.emeraldcoin"));
     }
 
+    public int GetCoinValue () {
+        return coinValue;
+    }
 }

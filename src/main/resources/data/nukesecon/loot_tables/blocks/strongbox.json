@@ -24,6 +24,17 @@
               ]
             },
             {
+              "function": "minecraft:copy_nbt",
+              "source": "block_entity",
+              "ops": [
+                {
+                  "source": "coin",
+                  "target": "BlockEntityTag.coin",
+                  "op": "replace"
+                }
+              ]
+            },
+            {
               "function": "minecraft:set_contents",
               "entries": [
                 {

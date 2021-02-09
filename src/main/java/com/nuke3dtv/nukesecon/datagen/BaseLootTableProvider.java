@@ -43,6 +43,8 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
                         .acceptFunction(CopyName.builder(CopyName.Source.BLOCK_ENTITY))
                         .acceptFunction(CopyNbt.builder(CopyNbt.Source.BLOCK_ENTITY)
                                 .addOperation("inv", "BlockEntityTag.inv", CopyNbt.Action.REPLACE))
+                        .acceptFunction(CopyNbt.builder(CopyNbt.Source.BLOCK_ENTITY)
+                                .addOperation("coin", "BlockEntityTag.coin", CopyNbt.Action.REPLACE))
                         .acceptFunction(SetContents.builder()
                                 .addLootEntry(DynamicLootEntry.func_216162_a(new ResourceLocation("minecraft", "contents"))))
                 );

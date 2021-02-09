@@ -13,10 +13,14 @@ import java.util.List;
 
 public class CopperCoin extends Item {
 
+    private static int defaultValue = 100;
+    private int coinValue;
+
     public CopperCoin() {
-        super(new Properties()
+        super(new Item.Properties()
                 .maxStackSize(64)
                 .group(ModSetup.ITEM_GROUP));
+        coinValue = defaultValue;
     }
 
     @Override
@@ -24,4 +28,7 @@ public class CopperCoin extends Item {
         list.add(new TranslationTextComponent("message.coppercoin"));
     }
 
+    public int GetCoinValue () {
+        return coinValue;
+    }
 }

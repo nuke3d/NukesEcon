@@ -13,10 +13,14 @@ import java.util.List;
 
 public class DiamondCoin extends Item {
 
+    private static int defaultValue = 10000;
+    private int coinValue;
+
     public DiamondCoin() {
-        super(new Properties()
+        super(new Item.Properties()
                 .maxStackSize(64)
                 .group(ModSetup.ITEM_GROUP));
+        coinValue = defaultValue;
     }
 
     @Override
@@ -24,4 +28,7 @@ public class DiamondCoin extends Item {
         list.add(new TranslationTextComponent("message.diamondcoin"));
     }
 
+    public int GetCoinValue () {
+        return coinValue;
+    }
 }

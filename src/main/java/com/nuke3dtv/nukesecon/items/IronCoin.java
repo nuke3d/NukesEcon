@@ -13,10 +13,14 @@ import java.util.List;
 
 public class IronCoin extends Item {
 
+    private static int defaultValue = 10;
+    private int coinValue;
+
     public IronCoin() {
-        super(new Properties()
+        super(new Item.Properties()
                 .maxStackSize(64)
                 .group(ModSetup.ITEM_GROUP));
+        coinValue = defaultValue;
     }
 
     @Override
@@ -24,4 +28,7 @@ public class IronCoin extends Item {
         list.add(new TranslationTextComponent("message.ironcoin"));
     }
 
+    public int GetCoinValue () {
+        return coinValue;
+    }
 }
