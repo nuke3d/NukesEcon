@@ -112,6 +112,9 @@ public class StrongBoxTile extends TileEntity {
     public int addCoin(int inCoin, int inCoinValue, boolean simulate) {
         int coinsBack = addCoin(inCoin * inCoinValue, simulate);
         if (coinsBack == 0) { return 0; }
+        // If not all coins could be added, be sure to return any that is too small for current coin value
+        int amtBack = coinsBack % inCoinValue;
+        if (amtBack > 0) addCoin(amtBack, simulate);
         return coinsBack / inCoinValue;
     }
     // returns amount that could not be added

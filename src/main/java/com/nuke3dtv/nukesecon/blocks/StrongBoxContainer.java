@@ -96,44 +96,47 @@ public class StrongBoxContainer extends Container {
         PlayerInventory playerinventory = player.inventory;
         if (slotId >= 1 && slotId <= 6) {
             if (dragType != 0) { return ItemStack.EMPTY; }
-            if (clickTypeIn == ClickType.PICKUP) {
-                // Add one coin type to whatever is on the mouse
-                if (clickTypeIn == ClickType.PICKUP) {
-                    if (playerinventory.getItemStack().getCount() == playerinventory.getItemStack().getMaxStackSize()) { return ItemStack.EMPTY; }
+            // Add one coin type to whatever is on the mouse
+            if (clickTypeIn == ClickType.PICKUP || clickTypeIn == ClickType.QUICK_MOVE) {
+                if (playerinventory.getItemStack().getCount() == playerinventory.getItemStack().getMaxStackSize()) { return ItemStack.EMPTY; }
 
-                    ItemStack newStack = ItemStack.EMPTY;
-                    int coinValue = 0;
-                    if (slotId == 1) {
-                        newStack = new ItemStack(Registration.WOODCOIN.get());
-                        coinValue = Registration.WOODCOIN.get().GetCoinValue();
-                    }
-                    if (slotId == 2) {
-                        newStack = new ItemStack(Registration.IRONCOIN.get());
-                        coinValue = Registration.IRONCOIN.get().GetCoinValue();
-                    }
-                    if (slotId == 3) {
-                        newStack = new ItemStack(Registration.COPPERCOIN.get());
-                        coinValue = Registration.COPPERCOIN.get().GetCoinValue();
-                    }
-                    if (slotId == 4) {
-                        newStack = new ItemStack(Registration.GOLDCOIN.get());
-                        coinValue = Registration.GOLDCOIN.get().GetCoinValue();
-                    }
-                    if (slotId == 5) {
-                        newStack = new ItemStack(Registration.DIAMONDCOIN.get());
-                        coinValue = Registration.DIAMONDCOIN.get().GetCoinValue();
-                    }
-                    if (slotId == 6) {
-                        newStack = new ItemStack(Registration.EMERALDCOIN.get());
-                        coinValue = Registration.EMERALDCOIN.get().GetCoinValue();
-                    }
-                    if (playerinventory.getItemStack().getItem() != newStack.getItem() && playerinventory.getItemStack().isEmpty() != true) { return ItemStack.EMPTY; }
-                    int afterSet = ((StrongBoxTile) tileEntity).getCoin(1, coinValue, false);
-                    newStack.setCount(afterSet);
-                    if (playerinventory.getItemStack().isEmpty() == false) { newStack.grow(playerinventory.getItemStack().getCount()); }
-                    playerinventory.setItemStack(newStack);
-                    return newStack;
+                int moveAmt = 1;
+                if (clickTypeIn == ClickType.QUICK_MOVE) { moveAmt = 64; }
+
+                ItemStack newStack = ItemStack.EMPTY;
+                int coinValue = 0;
+                if (slotId == 1) {
+                    newStack = new ItemStack(Registration.WOODCOIN.get());
+                    coinValue = Registration.WOODCOIN.get().GetCoinValue();
                 }
+                if (slotId == 2) {
+                    newStack = new ItemStack(Registration.IRONCOIN.get());
+                    coinValue = Registration.IRONCOIN.get().GetCoinValue();
+                }
+                if (slotId == 3) {
+                    newStack = new ItemStack(Registration.COPPERCOIN.get());
+                    coinValue = Registration.COPPERCOIN.get().GetCoinValue();
+                }
+                if (slotId == 4) {
+                    newStack = new ItemStack(Registration.GOLDCOIN.get());
+                    coinValue = Registration.GOLDCOIN.get().GetCoinValue();
+                }
+                if (slotId == 5) {
+                    newStack = new ItemStack(Registration.DIAMONDCOIN.get());
+                    coinValue = Registration.DIAMONDCOIN.get().GetCoinValue();
+                }
+                if (slotId == 6) {
+                    newStack = new ItemStack(Registration.EMERALDCOIN.get());
+                    coinValue = Registration.EMERALDCOIN.get().GetCoinValue();
+                }
+
+                if (playerinventory.getItemStack().getItem() != newStack.getItem() && playerinventory.getItemStack().isEmpty() != true) { return ItemStack.EMPTY; }
+                if (moveAmt == 64) { moveAmt = newStack.getMaxStackSize(); } // Correct to actual max stack size just in case we are trying to grab a stack
+                int afterSet = ((StrongBoxTile) tileEntity).getCoin(moveAmt, coinValue, false);
+                newStack.setCount(afterSet);
+                if (playerinventory.getItemStack().isEmpty() == false) { newStack.grow(playerinventory.getItemStack().getCount()); }
+                playerinventory.setItemStack(newStack);
+                return newStack;
             }
             return ItemStack.EMPTY;
         }
