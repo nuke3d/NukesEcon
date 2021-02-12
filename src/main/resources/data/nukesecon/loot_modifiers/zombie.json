@@ -1,0 +1,13 @@
+{
+  "type": "nukesecon:zombie",
+  "conditions":
+  [
+    {
+      "condition": "minecraft:entity_properties",
+      "predicate": {
+        "type": "minecraft:zombie"
+      },
+      "entity": "this"
+    }
+  ]
+}
