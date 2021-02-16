@@ -1,30 +1,25 @@
 package com.nuke3dtv.nukesecon.data;
 
-import com.google.common.collect.Table;
 import com.google.gson.JsonObject;
 import com.nuke3dtv.nukesecon.setup.Registration;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootContext;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootContext;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.TableLootEntry;
-import net.minecraft.world.storage.loot.conditions.ILootCondition;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
-import net.minecraftforge.common.loot.LootModifier;
-import net.minecraftforge.registries.ForgeRegistries;
-
+import net.minecraft.loot.conditions.*;
+import net.minecraftforge.common.loot.*;
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
 
 public class LootTableModifier extends LootModifier {
 
+    private final int maxCoins;
     private Random ran = new Random();
 
-    public LootTableModifier(ILootCondition[] conditionsIn) {
+    public LootTableModifier(ILootCondition[] conditionsIn, int inMaxCoins) {
         super(conditionsIn);
+        maxCoins = inMaxCoins;
     }
 
     @Nonnull
@@ -32,7 +27,6 @@ public class LootTableModifier extends LootModifier {
     public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
         // Add up to 10 coins with a decreasing amount of probability per role for every successful coin
         // Once we settle on how we are going to calculate this, move this to config files
-        int maxCoins = 10; // Maximum coins per loot
         int coinChance = 50; // Starting chance of coin
         int dimAmt = 5;
         int rangeMin = 1;
@@ -41,6 +35,7 @@ public class LootTableModifier extends LootModifier {
         int numIron = 0;
         int numCopper = 0;
         int numGold = 0;
+
         for (int i=1; i < maxCoins; i++) {
             int newRoll = ran.nextInt(rangeMax - rangeMin + 1) + rangeMin;
             if (newRoll <= coinChance) {
@@ -89,8 +84,13 @@ public class LootTableModifier extends LootModifier {
     public static class Serializer extends GlobalLootModifierSerializer<LootTableModifier> {
         @Override
         public LootTableModifier read(ResourceLocation name, JsonObject object, ILootCondition[] conditionsIn) {
-            return new LootTableModifier(conditionsIn);
+            int maxCoins = JSONUtils.getInt(object, "maxCoins");
+            return new LootTableModifier(conditionsIn, maxCoins);
         }
 
+        @Override
+        public JsonObject write(LootTableModifier instance) {
+            return makeConditions(instance.conditions);
+        }
     }
 }

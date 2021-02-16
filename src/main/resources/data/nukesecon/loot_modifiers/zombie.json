@@ -9,5 +9,6 @@
       },
       "entity": "this"
     }
-  ]
+  ],
+  "maxCoins": 10
 }

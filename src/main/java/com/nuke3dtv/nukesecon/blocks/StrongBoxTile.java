@@ -1,6 +1,7 @@
 package com.nuke3dtv.nukesecon.blocks;
 
 import com.nuke3dtv.nukesecon.setup.Config;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
@@ -37,11 +38,11 @@ public class StrongBoxTile extends TileEntity {
     }
 
     @Override
-    public void read(CompoundNBT tag) {
+    public void read(BlockState state, CompoundNBT tag) {
         itemHandler.deserializeNBT(tag.getCompound("inv"));
 
         coin = tag.getInt("coin");
-        super.read(tag);
+        super.read(state, tag);
     }
 
     @Override

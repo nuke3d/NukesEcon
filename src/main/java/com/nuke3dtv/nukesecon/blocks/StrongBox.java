@@ -31,20 +31,14 @@ public class StrongBox extends Block {
         super(Properties.create(Material.IRON)
                 .sound(SoundType.METAL)
                 .hardnessAndResistance(2.0f)
-                .lightValue(14)
+                .setLightLevel(state -> 14 / 16)
         );
-    }
-
-    @Override
-    public int getLightValue(BlockState state) {
-        return super.getLightValue(state);
     }
 
     @Override
     public boolean hasTileEntity(BlockState state) {
         return true;
     }
-
 
     @Nullable
     @Override
