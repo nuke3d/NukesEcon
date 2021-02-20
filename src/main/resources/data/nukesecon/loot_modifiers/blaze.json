@@ -1,0 +1,20 @@
+{
+  "type": "nukesecon:addcoins",
+  "conditions":
+  [
+    {
+      "condition": "minecraft:entity_properties",
+      "predicate": {
+        "type": "minecraft:blaze"
+      },
+      "entity": "this"
+    }
+  ],
+  "numRolls": 5,
+  "woodChance": 0,
+  "ironChance": 1,
+  "copperChance": 0.1,
+  "goldChance": 0.001,
+  "diamondChance": 0,
+  "emeraldChance": 0
+}
