@@ -5,7 +5,7 @@
     {
       "condition": "minecraft:entity_properties",
       "predicate": {
-        "type": "minecraft:zombie"
+        "type": "minecraft:phantom"
       },
       "entity": "this"
     }

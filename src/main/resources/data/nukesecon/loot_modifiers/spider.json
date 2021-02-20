@@ -5,12 +5,12 @@
     {
       "condition": "minecraft:entity_properties",
       "predicate": {
-        "type": "minecraft:zombie"
+        "type": "minecraft:spider"
       },
       "entity": "this"
     }
   ],
-  "numRolls": 5,
+  "numRolls": 2,
   "woodChance": 10,
   "ironChance": 1,
   "copperChance": 0.1,

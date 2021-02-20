@@ -5,13 +5,13 @@
     {
       "condition": "minecraft:entity_properties",
       "predicate": {
-        "type": "minecraft:zombie"
+        "type": "minecraft:enderman"
       },
       "entity": "this"
     }
   ],
-  "numRolls": 5,
-  "woodChance": 10,
+  "numRolls": 10,
+  "woodChance": 5,
   "ironChance": 1,
   "copperChance": 0.1,
   "goldChance": 0.001,

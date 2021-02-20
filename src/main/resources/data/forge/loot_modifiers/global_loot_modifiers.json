@@ -1,6 +1,37 @@
 {
   "replace": false,
   "entries": [
-    "nukesecon:zombie"
+    "nukesecon:blaze",
+    "nukesecon:cave_spider",
+    "nukesecon:creeper",
+    "nukesecon:drowned",
+    "nukesecon:elder_guardian",
+    "nukesecon:enderman",
+    "nukesecon:evoker",
+    "nukesecon:ghast",
+    "nukesecon:guardian",
+    "nukesecon:husk",
+    "nukesecon:iron_golem",
+    "nukesecon:phantom",
+    "nukesecon:piglin",
+    "nukesecon:piglin_brute",
+    "nukesecon:pillager",
+    "nukesecon:ravager",
+    "nukesecon:shulker",
+    "nukesecon:silverfish",
+    "nukesecon:skeleton",
+    "nukesecon:slime",
+    "nukesecon:spider",
+    "nukesecon:stray",
+    "nukesecon:vex",
+    "nukesecon:villager",
+    "nukesecon:vindicator",
+    "nukesecon:wandering_trader",
+    "nukesecon:witch",
+    "nukesecon:wither",
+    "nukesecon:wither_skeleton",
+    "nukesecon:zombie",
+    "nukesecon:zombie_piglin",
+    "nukesecon:zombie_villager"
   ]
 }

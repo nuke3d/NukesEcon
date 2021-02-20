@@ -5,14 +5,14 @@
     {
       "condition": "minecraft:entity_properties",
       "predicate": {
-        "type": "minecraft:zombie"
+        "type": "minecraft:evoker"
       },
       "entity": "this"
     }
   ],
   "numRolls": 5,
   "woodChance": 10,
-  "ironChance": 1,
+  "ironChance": 3,
   "copperChance": 0.1,
   "goldChance": 0.001,
   "diamondChance": 0,

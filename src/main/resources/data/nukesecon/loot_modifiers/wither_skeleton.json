@@ -5,12 +5,12 @@
     {
       "condition": "minecraft:entity_properties",
       "predicate": {
-        "type": "minecraft:zombie"
+        "type": "minecraft:wither_skeleton"
       },
       "entity": "this"
     }
   ],
-  "numRolls": 5,
+  "numRolls": 6,
   "woodChance": 10,
   "ironChance": 1,
   "copperChance": 0.1,

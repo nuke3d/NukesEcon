@@ -35,7 +35,7 @@ public class Registration {
         TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
         CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-       GLOBAL_LOOT_MODS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        GLOBAL_LOOT_MODS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     // Blocks
@@ -60,6 +60,6 @@ public class Registration {
     public static final RegistryObject<EmeraldCoin> EMERALDCOIN = ITEMS.register("emeraldcoin", EmeraldCoin::new);
 
     // Loot Tables
-    public static final RegistryObject<LootTableModifier.Serializer> GLM_ZOMBIE = GLOBAL_LOOT_MODS.register("zombie", LootTableModifier.Serializer::new);
+    public static final RegistryObject<LootTableModifier.Serializer> GLM_ADDCOINS = GLOBAL_LOOT_MODS.register("addcoins", LootTableModifier.Serializer::new);
 
 }

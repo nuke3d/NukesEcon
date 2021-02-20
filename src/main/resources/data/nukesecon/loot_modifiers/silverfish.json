@@ -5,16 +5,16 @@
     {
       "condition": "minecraft:entity_properties",
       "predicate": {
-        "type": "minecraft:zombie"
+        "type": "minecraft:silverfish"
       },
       "entity": "this"
     }
   ],
-  "numRolls": 5,
-  "woodChance": 10,
+  "numRolls": 1,
+  "woodChance": 0,
   "ironChance": 1,
-  "copperChance": 0.1,
-  "goldChance": 0.001,
+  "copperChance": 0,
+  "goldChance": 0,
   "diamondChance": 0,
   "emeraldChance": 0
 }
