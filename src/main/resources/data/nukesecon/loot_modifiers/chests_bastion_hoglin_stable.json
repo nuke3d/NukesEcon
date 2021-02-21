@@ -1,0 +1,17 @@
+{
+  "type": "nukesecon:addcoins",
+  "conditions":
+  [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/bastion_hoglin_stable"
+    }
+  ],
+  "numRolls": 1,
+  "woodChance": 20,
+  "ironChance": 10,
+  "copperChance": 1,
+  "goldChance": 0.1,
+  "diamondChance": 0.01,
+  "emeraldChance": 0.001
+}

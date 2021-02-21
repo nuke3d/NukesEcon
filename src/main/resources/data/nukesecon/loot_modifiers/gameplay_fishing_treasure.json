@@ -1,0 +1,17 @@
+{
+  "type": "nukesecon:addcoins",
+  "conditions":
+  [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:gameplay/fishing/treasure"
+    }
+  ],
+  "numRolls": 1,
+  "woodChance": 10,
+  "ironChance": 1,
+  "copperChance": 0.1,
+  "goldChance": 0.01,
+  "diamondChance": 0,
+  "emeraldChance": 0
+}
