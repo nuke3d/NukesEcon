@@ -1,6 +1,7 @@
 {
   "replace": false,
   "entries": [
+    "nukesecon:chests_simple_dungeon",
     "nukesecon:blaze",
     "nukesecon:cave_spider",
     "nukesecon:creeper",
@@ -32,6 +33,11 @@
     "nukesecon:wither_skeleton",
     "nukesecon:zombie",
     "nukesecon:zombie_piglin",
-    "nukesecon:zombie_villager"
+    "nukesecon:zombie_villager",
+    "nukesecon:chests_village_weaponsmith",
+    "nukesecon:chests_village_toolsmith",
+    "nukesecon:chests_village_armorer",
+    "nukesecon:chests_village_cartographer",
+    "nukesecon:chests_village_mason"
   ]
 }

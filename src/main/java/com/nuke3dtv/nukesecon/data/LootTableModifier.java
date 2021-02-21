@@ -21,21 +21,18 @@ public class LootTableModifier extends LootModifier {
     private final int goldChance;
     private final int diamondChance;
     private final int emeraldChance;
-    private final int mult = 100000;
-    private final int mult2;
     private Random ran = new Random();
 
-    public LootTableModifier(ILootCondition[] conditionsIn, int inNumRolls, int inWoodChance, int inIronChance,
-    int inCopperChance, int inGoldChance, int inDiamondChance, int inEmeraldChance) {
+    public LootTableModifier(ILootCondition[] conditionsIn, int inNumRolls, float inWoodChance, float inIronChance,
+    float inCopperChance, float inGoldChance, float inDiamondChance, float inEmeraldChance) {
         super(conditionsIn);
-        mult2 = mult / 100;
         numRolls = inNumRolls;
-        woodChance = inWoodChance * mult2;
-        ironChance = inIronChance * mult2;
-        copperChance = inCopperChance * mult2;
-        goldChance = inGoldChance * mult2;
-        diamondChance = inDiamondChance * mult2;
-        emeraldChance = inEmeraldChance * mult2;
+        woodChance = (int) inWoodChance * 1000000;
+        ironChance = (int) inIronChance * 1000000;
+        copperChance = (int) inCopperChance * 1000000;
+        goldChance = (int) inGoldChance * 1000000;
+        diamondChance = (int) inDiamondChance * 1000000;
+        emeraldChance = (int) inEmeraldChance * 1000000;
     }
 
     @Nonnull
@@ -52,7 +49,7 @@ public class LootTableModifier extends LootModifier {
         int numEmerald = 0;
 
         for (int i=1; i <= numRolls; i++) {
-            int newRoll = ran.nextInt(mult) + 1;
+            int newRoll = ran.nextInt(1000000) + 1;
             if (newRoll <= woodChance) {
                 numWood += 1;
                 continue;
@@ -111,12 +108,12 @@ public class LootTableModifier extends LootModifier {
         @Override
         public LootTableModifier read(ResourceLocation name, JsonObject object, ILootCondition[] conditionsIn) {
             int numRolls = JSONUtils.getInt(object, "numRolls");
-            int woodChance = JSONUtils.getInt(object, "woodChance");
-            int ironChance = JSONUtils.getInt(object, "ironChance");
-            int copperChance = JSONUtils.getInt(object, "copperChance");
-            int goldChance = JSONUtils.getInt(object, "goldChance");
-            int diamondChance = JSONUtils.getInt(object, "diamondChance");
-            int emeraldChance = JSONUtils.getInt(object, "emeraldChance");
+            float woodChance = JSONUtils.getFloat(object, "woodChance");
+            float ironChance = JSONUtils.getFloat(object, "ironChance");
+            float copperChance = JSONUtils.getFloat(object, "copperChance");
+            float goldChance = JSONUtils.getFloat(object, "goldChance");
+            float diamondChance = JSONUtils.getFloat(object, "diamondChance");
+            float emeraldChance = JSONUtils.getFloat(object, "emeraldChance");
             return new LootTableModifier(conditionsIn, numRolls, woodChance, ironChance,
                     copperChance, goldChance, diamondChance, emeraldChance);
         }
