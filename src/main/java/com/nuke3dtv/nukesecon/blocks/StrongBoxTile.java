@@ -26,6 +26,7 @@ public class StrongBoxTile extends TileEntity {
 
     // This holds the amount of coins we have in the StrongBox
     private int coin;
+    private int keycode;
 
     public StrongBoxTile() {
         super(STRONGBOX_TILE.get());
@@ -42,6 +43,7 @@ public class StrongBoxTile extends TileEntity {
         itemHandler.deserializeNBT(tag.getCompound("inv"));
 
         coin = tag.getInt("coin");
+        keycode = tag.getInt("keycode");
         super.read(state, tag);
     }
 
@@ -50,6 +52,7 @@ public class StrongBoxTile extends TileEntity {
         tag.put("inv", itemHandler.serializeNBT());
 
         tag.putInt("coin", coin);
+        tag.putInt("keycode", keycode);
         return super.write(tag);
     }
 
