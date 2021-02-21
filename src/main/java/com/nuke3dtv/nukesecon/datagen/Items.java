@@ -17,6 +17,8 @@ public class Items extends ItemModelProvider {
     protected void registerModels() {
         singleTexture(Registration.IRONLOCK.get().getRegistryName().getPath(), new ResourceLocation("item/handheld"),
                 "layer0", new ResourceLocation(NukesEcon.MODID, "item/ironlock"));
+        singleTexture(Registration.STRONGBOX_KEY.get().getRegistryName().getPath(), new ResourceLocation("item/handheld"),
+                "layer0", new ResourceLocation(NukesEcon.MODID, "item/strongbox_key"));
         singleTexture(Registration.WOODCOIN.get().getRegistryName().getPath(), new ResourceLocation("item/handheld"),
                 "layer0", new ResourceLocation(NukesEcon.MODID, "item/woodcoin"));
         singleTexture(Registration.IRONCOIN.get().getRegistryName().getPath(), new ResourceLocation("item/handheld"),

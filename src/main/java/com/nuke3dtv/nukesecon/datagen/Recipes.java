@@ -30,6 +30,16 @@ public class Recipes extends RecipeProvider {
                 .addCriterion("cobblestone", InventoryChangeTrigger.Instance.forItems(Blocks.IRON_ORE))
                 .build(consumer);
 
+        ShapedRecipeBuilder.shapedRecipe(Registration.STRONGBOX_KEY.get())
+                .patternLine(" ##")
+                .patternLine(" ##")
+                .patternLine(" xx")
+                .key('x', Tags.Items.INGOTS_IRON)
+                .key('#', Tags.Items.NUGGETS_IRON)
+                .setGroup("nukesecon")
+                .addCriterion("cobblestone", InventoryChangeTrigger.Instance.forItems(Blocks.IRON_ORE))
+                .build(consumer);
+
         ShapedRecipeBuilder.shapedRecipe(Registration.STRONGBOX.get())
                 .patternLine("xxx")
                 .patternLine("x#x")
