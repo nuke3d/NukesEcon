@@ -1,9 +1,11 @@
 package com.nuke3dtv.nukesecon.setup;
 
 import com.nuke3dtv.nukesecon.NukesEcon;
+import com.nuke3dtv.nukesecon.data.NukeLockEventHandler;
 import com.nuke3dtv.nukesecon.network.Networking;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
@@ -20,5 +22,8 @@ public class ModSetup {
     public static void init(final FMLCommonSetupEvent event) {
         Networking.registerMessages();
 
+        //MinecraftForge.EVENT_BUS.addListener(NukeLockEventHandler::onAttachCapabilitiesEvent);
+        //MinecraftForge.EVENT_BUS.addListener(NukeLockEventHandler::onAttackEvent);
+        //MinecraftForge.EVENT_BUS.addListener(NukeLockEventHandler::onDeathEvent);
     }
 }

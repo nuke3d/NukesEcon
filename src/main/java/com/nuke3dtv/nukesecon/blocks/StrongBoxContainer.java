@@ -38,13 +38,15 @@ public class StrongBoxContainer extends Container {
 
         if (tileEntity != null) {
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
-                addSlot(new SlotItemHandler(h, 0, 9, 23));  // Coin deposit
-                addSlot(new SlotItemHandler(h, 1, 38, 23));  // Wood slot
-                addSlot(new SlotItemHandler(h, 2, 56, 23));  // Iron slot
-                addSlot(new SlotItemHandler(h, 3, 74, 23));  // Copper slot
-                addSlot(new SlotItemHandler(h, 4, 92, 23)); // Gold slot
-                addSlot(new SlotItemHandler(h, 5, 110, 23)); // Diamond slot
-                addSlot(new SlotItemHandler(h, 6, 128, 23)); // Emerald slot
+                addSlot(new SlotItemHandler(h, 0, 141, 3));  // Key In
+                addSlot(new SlotItemHandler(h, 1, 159, 3));  // Key Out
+                addSlot(new SlotItemHandler(h, 2, 9, 23));  // Coin deposit
+                addSlot(new SlotItemHandler(h, 3, 38, 23));  // Wood slot
+                addSlot(new SlotItemHandler(h, 4, 56, 23));  // Iron slot
+                addSlot(new SlotItemHandler(h, 5, 74, 23));  // Copper slot
+                addSlot(new SlotItemHandler(h, 6, 92, 23)); // Gold slot
+                addSlot(new SlotItemHandler(h, 7, 110, 23)); // Diamond slot
+                addSlot(new SlotItemHandler(h, 8, 128, 23)); // Emerald slot
             });
         }
         layoutPlayerInventorySlots(10, 70);
@@ -94,7 +96,7 @@ public class StrongBoxContainer extends Container {
     public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player) {
         // If one of the coin slots is clicked, attempt to withdraw coins to mouse
         PlayerInventory playerinventory = player.inventory;
-        if (slotId >= 1 && slotId <= 6) {
+        if (slotId >= 3 && slotId <= 8) {
             if (dragType != 0) { return ItemStack.EMPTY; }
             // Add one coin type to whatever is on the mouse
             if (clickTypeIn == ClickType.PICKUP || clickTypeIn == ClickType.QUICK_MOVE) {
@@ -105,27 +107,27 @@ public class StrongBoxContainer extends Container {
 
                 ItemStack newStack = ItemStack.EMPTY;
                 int coinValue = 0;
-                if (slotId == 1) {
+                if (slotId == 3) {
                     newStack = new ItemStack(Registration.WOODCOIN.get());
                     coinValue = Registration.WOODCOIN.get().GetCoinValue();
                 }
-                if (slotId == 2) {
+                if (slotId == 4) {
                     newStack = new ItemStack(Registration.IRONCOIN.get());
                     coinValue = Registration.IRONCOIN.get().GetCoinValue();
                 }
-                if (slotId == 3) {
+                if (slotId == 5) {
                     newStack = new ItemStack(Registration.COPPERCOIN.get());
                     coinValue = Registration.COPPERCOIN.get().GetCoinValue();
                 }
-                if (slotId == 4) {
+                if (slotId == 6) {
                     newStack = new ItemStack(Registration.GOLDCOIN.get());
                     coinValue = Registration.GOLDCOIN.get().GetCoinValue();
                 }
-                if (slotId == 5) {
+                if (slotId == 7) {
                     newStack = new ItemStack(Registration.DIAMONDCOIN.get());
                     coinValue = Registration.DIAMONDCOIN.get().GetCoinValue();
                 }
-                if (slotId == 6) {
+                if (slotId == 8) {
                     newStack = new ItemStack(Registration.EMERALDCOIN.get());
                     coinValue = Registration.EMERALDCOIN.get().GetCoinValue();
                 }
@@ -151,20 +153,20 @@ public class StrongBoxContainer extends Container {
             ItemStack stack = slot.getStack();
             itemstack = stack.copy();
             if (index == 0) {
-                if (!this.mergeItemStack(stack, 1, 37, true)) {
+                if (!this.mergeItemStack(stack, 3, 39, true)) {
                     return ItemStack.EMPTY;
                 }
                 slot.onSlotChange(stack, itemstack);
             } else {
                 if (stack.getItem() == Registration.WOODCOIN.get() || stack.getItem() == Registration.IRONCOIN.get() || stack.getItem() == Registration.COPPERCOIN.get() || stack.getItem() == Registration.GOLDCOIN.get() || stack.getItem() == Registration.DIAMONDCOIN.get() || stack.getItem() == Registration.EMERALDCOIN.get()) {
-                    if (!this.mergeItemStack(stack, 0, 1, false)) {
+                    if (!this.mergeItemStack(stack, 2, 3, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index < 28) {
-                    if (!this.mergeItemStack(stack, 34, 43, false)) {
+                } else if (index < 30) {
+                    if (!this.mergeItemStack(stack, 36, 45, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index < 43 && !this.mergeItemStack(stack, 1, 34, false)) {
+                } else if (index < 45 && !this.mergeItemStack(stack, 3, 36, false)) {
                     return ItemStack.EMPTY;
                 }
             }
@@ -206,7 +208,7 @@ public class StrongBoxContainer extends Container {
 
     private void layoutPlayerInventorySlots(int leftCol, int topRow) {
         // Player inventory
-        addSlotBox(playerInventory, 9, leftCol, topRow, 9, 18, 3, 18);
+        addSlotBox(playerInventory, 11, leftCol, topRow, 9, 18, 3, 18);
 
         // Hotbar
         topRow += 58;
