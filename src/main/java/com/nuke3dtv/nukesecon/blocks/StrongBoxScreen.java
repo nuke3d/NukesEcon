@@ -26,7 +26,8 @@ public class StrongBoxScreen extends ContainerScreen<StrongBoxContainer> {
 
     @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
-        drawString(matrixStack, Minecraft.getInstance().fontRenderer, "Coins: " + container.getCoins(), 10, 10, 0xffffff);
+        drawString(matrixStack, Minecraft.getInstance().fontRenderer, "Coins: " + container.getCoins(), 10, 2, 0xffffff);
+        drawString(matrixStack, Minecraft.getInstance().fontRenderer, "Code: " + container.getKeyCode(), 10, 14, 0xffffff);
     }
 
     @Override

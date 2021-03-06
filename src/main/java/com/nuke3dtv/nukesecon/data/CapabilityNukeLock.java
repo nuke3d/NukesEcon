@@ -25,13 +25,19 @@ public class CapabilityNukeLock {
         public INBT writeNBT(Capability<INukeLock> capability, INukeLock instance, Direction side) {
             CompoundNBT tag = new CompoundNBT();
             tag.putInt("keycode", instance.getKeyCode());
+            tag.putBoolean("locked", instance.getLocked());
+            tag.putBoolean("skeleton", instance.getSkeleton());
             return tag;
         }
 
         @Override
         public void readNBT(Capability<INukeLock> capability, INukeLock instance, Direction side, INBT nbt) {
             int keycode = ((CompoundNBT) nbt).getInt("keycode");
+            boolean locked = ((CompoundNBT) nbt).getBoolean("locked");
+            boolean skeleton = ((CompoundNBT) nbt).getBoolean("skeleton");
             instance.setKeyCode(keycode);
+            instance.setLocked(locked);
+            instance.setSkeleton(skeleton);
         }
     }
 

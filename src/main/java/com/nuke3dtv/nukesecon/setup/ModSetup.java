@@ -1,6 +1,7 @@
 package com.nuke3dtv.nukesecon.setup;
 
 import com.nuke3dtv.nukesecon.NukesEcon;
+import com.nuke3dtv.nukesecon.data.CapabilityNukeLock;
 import com.nuke3dtv.nukesecon.data.NukeLockEventHandler;
 import com.nuke3dtv.nukesecon.network.Networking;
 import net.minecraft.item.ItemGroup;
@@ -15,12 +16,13 @@ public class ModSetup {
     public static final ItemGroup ITEM_GROUP = new ItemGroup("nukesecon") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(Registration.STRONGBOX.get());
+            return new ItemStack(Registration.EMERALDCOIN.get());
         }
     };
 
     public static void init(final FMLCommonSetupEvent event) {
         Networking.registerMessages();
+        CapabilityNukeLock.register();
 
         //MinecraftForge.EVENT_BUS.addListener(NukeLockEventHandler::onAttachCapabilitiesEvent);
         //MinecraftForge.EVENT_BUS.addListener(NukeLockEventHandler::onAttackEvent);
