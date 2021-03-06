@@ -70,9 +70,9 @@ public class StrongBox extends Block {
                 boolean openBox = false; // This will be true if we can open the strongbox after all checks made
 
                 // Check that player has the key in inventory or in a container within their inventory. (Future keyring functionality?)
-                // First check player inventory
                 if (tileLock.getLocked() == false) openBox = true; // Always unlock if box is unlocked
-                //if (((StrongBoxTile) tileEntity).isBoxLocked() == false) openBox = true; // Always unlock if box is unlocked
+
+                // First check player inventory
                 for (int i=0; i <= player.inventory.getSizeInventory(); i++) {
                     INukeLock keyKey = player.inventory.getStackInSlot(i).getCapability(CapabilityNukeLock.NUKELOCK_CAPABILITY).orElse(new DefaultNukeLock());
                     if (tileLock.getKeyCode() == keyKey.getInverseOf(keyKey.getKeyCode())) {
@@ -81,6 +81,15 @@ public class StrongBox extends Block {
                         break;
                     }
                 }
+
+                // Check for skeleton key in hand
+                if (openBox == false && player.inventory.getCurrentItem().getItem() == Registration.STRONGBOX_SKELETONKEY.get()) {
+                    // Open sesame!!!!
+                    openBox = true;
+                    // Destroy the key
+                    player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+                }
+
                 if (openBox) {
                     INamedContainerProvider containerProvider = new INamedContainerProvider() {
                         @Override

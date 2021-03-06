@@ -8,6 +8,7 @@
     "item.nukesecon.emeraldcoin": "Emerald Coin",
     "block.nukesecon.strongbox": "Strongbox",
     "block.nukesecon.strongbox_key": "Strongbox Key",
+    "block.nukesecon.strongbox_skeletonkey": "Strongbox Skeleton Key",
 
     "_comment": "Creative Tabs",
     "itemGroup.nukesecon": "Nuke's Economy",
@@ -15,6 +16,7 @@
     "message.nukesecon.command.test": "Hello world!",
     "message.strongbox": "Strongbox container. Safely hold your coins!",
     "message.strongbox_key": "Strongbox container key.",
+    "message.strongbox_skeletonkey": "Strongbox container skeleton key.",
     "message.ironlock": "Iron Lock for StrongBox",
     "message.woodcoin": "Nuke's Economy Wood Coin",
     "message.ironcoin": "Nuke's Economy Iron Coin",

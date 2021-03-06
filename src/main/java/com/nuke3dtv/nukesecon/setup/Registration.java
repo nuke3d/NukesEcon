@@ -53,6 +53,7 @@ public class Registration {
     // Items
     public static final RegistryObject<IronLock> IRONLOCK = ITEMS.register("ironlock", IronLock::new);
     public static final RegistryObject<StrongboxKey> STRONGBOX_KEY = ITEMS.register("strongbox_key", StrongboxKey::new);
+    public static final RegistryObject<StrongboxSkeletonKey> STRONGBOX_SKELETONKEY = ITEMS.register("strongbox_skeletonkey", StrongboxSkeletonKey::new);
     public static final RegistryObject<WoodCoin> WOODCOIN = ITEMS.register("woodcoin", WoodCoin::new);
     public static final RegistryObject<IronCoin> IRONCOIN = ITEMS.register("ironcoin", IronCoin::new);
     public static final RegistryObject<CopperCoin> COPPERCOIN = ITEMS.register("coppercoin", CopperCoin::new);
