@@ -41,8 +41,8 @@ public class StrongBoxContainer extends Container {
 
         if (tileEntity != null) {
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
-                addSlot(new SlotItemHandler(h, 0, 141, 3));  // Key In
-                addSlot(new SlotItemHandler(h, 1, 159, 3));  // Key Out
+                addSlot(new SlotItemHandler(h, 0, 135, 45));  // Key In
+                addSlot(new SlotItemHandler(h, 1, 153, 45));  // Key Out
                 addSlot(new SlotItemHandler(h, 2, 9, 23));  // Coin deposit
                 // Not sure why I didn't call addSlotRange to begin with
                 addSlotRange(h, 3, 38, 23, 6, 18);
@@ -52,6 +52,7 @@ public class StrongBoxContainer extends Container {
                     //addSlot(new SlotItemHandler(h, 6, 92, 23)); // Gold slot
                     //addSlot(new SlotItemHandler(h, 7, 110, 23)); // Diamond slot
                     //addSlot(new SlotItemHandler(h, 8, 128, 23)); // Emerald slot
+                addSlot(new SlotItemHandler(h, 9, 152, 2));  // Lock slot
             });
         }
         layoutPlayerInventorySlots(10, 70);
@@ -154,6 +155,19 @@ public class StrongBoxContainer extends Container {
             // If the slot is empty, don't let them try to put something in the programmed key slot
             if (!playerinventory.getItemStack().isEmpty()) {
                 return playerinventory.getItemStack();
+            }
+        } else if (slotId == 9) {
+            // Only allow locks here
+            if (playerinventory.getItemStack().isEmpty()) {
+                // If nothing in their mouse then let them pickup anything in the slot
+                return super.slotClick(slotId, dragType, clickTypeIn, player);
+            } else {
+                // If something in there hand it must be a lock or no go
+                if (playerinventory.getItemStack().getItem() == Registration.IRONLOCK.get()) {
+                    return super.slotClick(slotId, dragType, clickTypeIn, player);
+                } else {
+                    return playerinventory.getItemStack();
+                }
             }
         } else if (slotId >= 3 && slotId <= 8) {
             // Get coin slots

@@ -46,8 +46,6 @@ public class StrongBoxTile extends TileEntity {
         super(STRONGBOX_TILE.get());
             // We will create unique id here and send it out to client
             nukeHandler.setKeyCode(ran.nextInt(1000000000));
-            //keycode = ran.nextInt(1000000000); // obtain up to 9 digit number (999999999)
-            //locked = false;
     }
 
     @Override
@@ -77,7 +75,7 @@ public class StrongBoxTile extends TileEntity {
     }
 
     private ItemStackHandler createHandler() {
-        return new ItemStackHandler(9) {
+        return new ItemStackHandler(10) {
 
             @Override
             protected void onContentsChanged(int slot) {
@@ -87,16 +85,23 @@ public class StrongBoxTile extends TileEntity {
                     if (this.getStackInSlot(slot).getItem() == STRONGBOX_KEY.get() && this.getStackInSlot(1).isEmpty()) {
                         INukeLock keyKey = this.getStackInSlot(slot).getCapability(CapabilityNukeLock.NUKELOCK_CAPABILITY).orElse(new DefaultNukeLock());
                         keyKey.setKeyCode(nukeHandler.getInverseOf(nukeHandler.getKeyCode()));
-                        nukeHandler.setLocked(true);
+                        nukeHandler.setLocked(false);
 
                         this.setStackInSlot(1, this.getStackInSlot(slot));
                         this.setStackInSlot(slot, ItemStack.EMPTY);
                     }
                 } else if (slot == 1) {
-                    // key was just coded - not sure if anything to do here yet
-                } else if (slot == 2) {
+                    // Not sure if I need anything here or not yet
+               } else if (slot == 2) {
                     if (!this.getStackInSlot(slot).isEmpty()) {
                         this.setStackInSlot(slot, acceptStack(this.getStackInSlot(slot))); // absorb the stack
+                    }
+                } else if (slot == 9) {
+                    // If there is a lock here then the box is locked
+                    if (this.getStackInSlot(9).getItem() == IRONLOCK.get()) {
+                        nukeHandler.setLocked(true);
+                    } else {
+                        nukeHandler.setLocked(false);
                     }
                 }
                 // To make sure the TE persists when the chunk is saved later we need to
@@ -116,6 +121,7 @@ public class StrongBoxTile extends TileEntity {
                 if(slot == 6) return stack.getItem() == GOLDCOIN.get();      // gold coin slot
                 if(slot == 7) return stack.getItem() == DIAMONDCOIN.get();   // diamond coin slot
                 if(slot == 8) return stack.getItem() == EMERALDCOIN.get();   // emerald coin slot
+                if(slot == 9) return stack.getItem() == IRONLOCK.get();      // lock slot
                 // add coin slot
                 return (stack.getItem() == WOODCOIN.get() || stack.getItem() == IRONCOIN.get() || stack.getItem() == COPPERCOIN.get() || stack.getItem() == GOLDCOIN.get() || stack.getItem() == DIAMONDCOIN.get() || stack.getItem() == EMERALDCOIN.get());
             }
