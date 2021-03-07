@@ -8,6 +8,10 @@
         "type": "minecraft:silverfish"
       },
       "entity": "this"
+    },
+    {
+      "condition": "minecraft:damage_source_properties",
+      "predicate": {}
     }
   ],
   "numRolls": 1,
