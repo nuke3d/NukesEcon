@@ -4,6 +4,7 @@ import com.nuke3dtv.nukesecon.NukesEcon;
 import com.nuke3dtv.nukesecon.data.CapabilityNukeLock;
 import com.nuke3dtv.nukesecon.data.NukeLockEventHandler;
 import com.nuke3dtv.nukesecon.network.Networking;
+import com.nuke3dtv.nukesecon.villager.VillagerTradeHandler;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -24,6 +25,7 @@ public class ModSetup {
         Networking.registerMessages();
         CapabilityNukeLock.register();
 
+        MinecraftForge.EVENT_BUS.addListener(VillagerTradeHandler::onVillagerTradesEvent);
         //MinecraftForge.EVENT_BUS.addListener(NukeLockEventHandler::onAttachCapabilitiesEvent);
         //MinecraftForge.EVENT_BUS.addListener(NukeLockEventHandler::onAttackEvent);
         //MinecraftForge.EVENT_BUS.addListener(NukeLockEventHandler::onDeathEvent);

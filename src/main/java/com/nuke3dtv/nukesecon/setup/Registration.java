@@ -5,10 +5,12 @@ import com.nuke3dtv.nukesecon.data.LootTableModifier;
 import com.nuke3dtv.nukesecon.items.*;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.datafix.fixes.VillagerTrades;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.extensions.IForgeContainerType;
@@ -28,6 +30,7 @@ public class Registration {
     private static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MODID);
     private static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MODID);
     private static final DeferredRegister<GlobalLootModifierSerializer<?>> GLOBAL_LOOT_MODS = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, MODID);
+    private static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(ForgeRegistries.PROFESSIONS, MODID);
 
     public static void init() {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -36,6 +39,7 @@ public class Registration {
         CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         GLOBAL_LOOT_MODS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        PROFESSIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     // Blocks
@@ -63,5 +67,9 @@ public class Registration {
 
     // Loot Tables
     public static final RegistryObject<LootTableModifier.Serializer> GLM_ADDCOINS = GLOBAL_LOOT_MODS.register("addcoins", LootTableModifier.Serializer::new);
+
+    // Professions
+
+    // Careers
 
 }
