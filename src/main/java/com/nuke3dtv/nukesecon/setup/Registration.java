@@ -53,6 +53,10 @@ public class Registration {
         World world = inv.player.getEntityWorld();
         return new StrongBoxContainer(windowId, world, pos, inv, inv.player);
     }));
+    public static final RegistryObject<ContainerType<WalletContainer>> WALLET_CONTAINER = CONTAINERS.register("wallet", () -> IForgeContainerType.create((windowId, inv, data) -> {
+        World world = inv.player.getEntityWorld();
+        return new WalletContainer(windowId, world, inv, inv.player);
+    }));
 
     // Items
     public static final RegistryObject<IronLock> IRONLOCK = ITEMS.register("ironlock", IronLock::new);
@@ -64,6 +68,7 @@ public class Registration {
     public static final RegistryObject<GoldCoin> GOLDCOIN = ITEMS.register("goldcoin", GoldCoin::new);
     public static final RegistryObject<DiamondCoin> DIAMONDCOIN = ITEMS.register("diamondcoin", DiamondCoin::new);
     public static final RegistryObject<EmeraldCoin> EMERALDCOIN = ITEMS.register("emeraldcoin", EmeraldCoin::new);
+    public static final RegistryObject<Wallet> WALLET = ITEMS.register("wallet", Wallet::new);
 
     // Loot Tables
     public static final RegistryObject<LootTableModifier.Serializer> GLM_ADDCOINS = GLOBAL_LOOT_MODS.register("addcoins", LootTableModifier.Serializer::new);

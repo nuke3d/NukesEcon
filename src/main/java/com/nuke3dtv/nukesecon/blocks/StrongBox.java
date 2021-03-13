@@ -1,9 +1,8 @@
 package com.nuke3dtv.nukesecon.blocks;
 
-import com.nuke3dtv.nukesecon.data.CapabilityNukeLock;
-import com.nuke3dtv.nukesecon.data.DefaultNukeLock;
-import com.nuke3dtv.nukesecon.data.INukeLock;
-import com.nuke3dtv.nukesecon.data.NukeLockProvider;
+import com.nuke3dtv.nukesecon.capabilities.CapabilityNukeLock;
+import com.nuke3dtv.nukesecon.capabilities.DefaultNukeLock;
+import com.nuke3dtv.nukesecon.capabilities.INukeLock;
 import com.nuke3dtv.nukesecon.setup.Registration;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -16,7 +15,6 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
@@ -31,7 +29,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class StrongBox extends Block {
 

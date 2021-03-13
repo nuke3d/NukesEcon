@@ -15,6 +15,8 @@ public class Items extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+        singleTexture(Registration.WALLET.get().getRegistryName().getPath(), new ResourceLocation("item/handheld"),
+                "layer0", new ResourceLocation(NukesEcon.MODID, "item/wallet"));
         singleTexture(Registration.IRONLOCK.get().getRegistryName().getPath(), new ResourceLocation("item/handheld"),
                 "layer0", new ResourceLocation(NukesEcon.MODID, "item/ironlock"));
         singleTexture(Registration.STRONGBOX_KEY.get().getRegistryName().getPath(), new ResourceLocation("item/handheld"),

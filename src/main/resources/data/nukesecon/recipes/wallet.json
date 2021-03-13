@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "nukesecon",
+  "pattern": [
+    "xxx",
+    "x#x",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "tag": "forge:leather"
+    },
+    "#": {
+      "item": "nukesecon:woodcoin"
+    }
+  },
+  "result": {
+    "item": "nukesecon:wallet"
+  }
+}

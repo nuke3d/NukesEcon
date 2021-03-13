@@ -1,8 +1,7 @@
 package com.nuke3dtv.nukesecon.setup;
 
 import com.nuke3dtv.nukesecon.NukesEcon;
-import com.nuke3dtv.nukesecon.data.CapabilityNukeLock;
-import com.nuke3dtv.nukesecon.data.NukeLockEventHandler;
+import com.nuke3dtv.nukesecon.capabilities.CapabilityNukeLock;
 import com.nuke3dtv.nukesecon.network.Networking;
 import com.nuke3dtv.nukesecon.villager.VillagerTradeHandler;
 import net.minecraft.item.ItemGroup;

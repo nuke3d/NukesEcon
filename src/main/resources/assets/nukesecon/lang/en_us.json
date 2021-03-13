@@ -1,4 +1,5 @@
 {
+    "item.nukesecon.wallet": "Wallet",
     "item.nukesecon.ironlock": "Iron Lock",
     "item.nukesecon.woodcoin": "Wood Coin",
     "item.nukesecon.ironcoin": "Iron Coin",
@@ -17,6 +18,7 @@
     "message.strongbox": "Strongbox container. Safely hold your coins!",
     "message.strongbox_key": "Strongbox container key.",
     "message.strongbox_skeletonkey": "Strongbox container skeleton key.",
+    "message.wallet": "Nuke's Economy Wallet",
     "message.ironlock": "Iron Lock for StrongBox",
     "message.woodcoin": "Nuke's Economy Wood Coin",
     "message.ironcoin": "Nuke's Economy Iron Coin",
@@ -25,5 +27,6 @@
     "message.diamondcoin": "Nuke's Economy Diamond Coin",
     "message.emeraldcoin": "Nuke's Economy Emerald Coin",
 
-    "screen.nukesecon.strongbox": "StrongBox Screen"
+    "screen.nukesecon.strongbox": "StrongBox Screen",
+    "screen.nukesecon.wallet": "Wallet Screen"
 }

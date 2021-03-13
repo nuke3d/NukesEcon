@@ -1,4 +1,4 @@
-package com.nuke3dtv.nukesecon.data;
+package com.nuke3dtv.nukesecon.capabilities;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;

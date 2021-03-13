@@ -18,31 +18,134 @@ public class VillagerTradeHandler {
 
     @SubscribeEvent
     public static void onVillagerTradesEvent(VillagerTradesEvent event) {
-        boolean deleteEmeralds = true; // Make this in to a setting
-        
+
+        // Would like to move all the below into a config file so trades for different villagers can be modified that way
+
+        boolean deleteEmeralds = false; // Make this in to a setting
+
+        int baseCost; // base number of items/coins the villager wants
+        int baseRewards; // Base number of items/coins the villager will give
+        int baseMaxUses;
+        int baseXPValue;
+
+        // ARMORER
+        if (event.getType() == VillagerProfession.ARMORER) {
+            // Delete Emerald Trades
+            if (deleteEmeralds) { DeleteEmeraldTrades(event); }
+
+            // Iron Helmet for Money
+            baseCost = 50 ; // base number of items to trade per trade
+            baseRewards = 1; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.IRON_HELMET, rewardCount), baseMaxUses, baseXPValue));
+            }
+            // Iron Chestplate for Money
+            baseCost = 80 ; // base number of items to trade per trade
+            baseRewards = 1; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.IRON_CHESTPLATE, rewardCount), baseMaxUses, baseXPValue));
+            }
+            // Iron Leggings for Money
+            baseCost = 70 ; // base number of items to trade per trade
+            baseRewards = 1; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.IRON_LEGGINGS, rewardCount), baseMaxUses, baseXPValue));
+            }
+            // Iron Boots for Money
+            baseCost = 40 ; // base number of items to trade per trade
+            baseRewards = 1; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.IRON_BOOTS, rewardCount), baseMaxUses, baseXPValue));
+            }
+            // Money for Iron Ingots
+            baseCost = 10;
+            baseRewards = 25;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeMoneyForThing(new ItemStack(Items.IRON_INGOT, wantedCount), ItemStack.EMPTY, rewardCount, baseMaxUses, baseXPValue));
+            }
+        }
+        // FARMER
         if (event.getType() == VillagerProfession.FARMER) {
             // Delete Emerald Trades
             if (deleteEmeralds) { DeleteEmeraldTrades(event); }
+
             // Wheat for Money
-            event.getTrades().get(1).add(new NukeTradeThingForMoney(12, new ItemStack(Items.WHEAT, 6), 4, 1));
-            event.getTrades().get(2).add(new NukeTradeThingForMoney(24, new ItemStack(Items.WHEAT, 12), 4, 1));
-            event.getTrades().get(3).add(new NukeTradeThingForMoney(48, new ItemStack(Items.WHEAT, 24), 4, 1));
-            event.getTrades().get(4).add(new NukeTradeThingForMoney(96, new ItemStack(Items.WHEAT, 48), 4, 1));
-            event.getTrades().get(5).add(new NukeTradeThingForMoney(128, new ItemStack(Items.WHEAT, 64), 4, 1));
+            baseCost = 12 ; // base number of items to trade per trade
+            baseRewards = 6; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.WHEAT, rewardCount), baseMaxUses, baseXPValue));
+            }
             // Money for Bonemeal
-            event.getTrades().get(1).add(new NukeTradeMoneyForThing(new ItemStack(Items.BONE_MEAL.getItem(), 6), ItemStack.EMPTY, 12, 4, 1));
-            event.getTrades().get(2).add(new NukeTradeMoneyForThing(new ItemStack(Items.BONE_MEAL.getItem(), 12), ItemStack.EMPTY, 24, 4, 1));
-            event.getTrades().get(3).add(new NukeTradeMoneyForThing(new ItemStack(Items.BONE_MEAL.getItem(), 24), ItemStack.EMPTY, 48, 4, 1));
-            event.getTrades().get(4).add(new NukeTradeMoneyForThing(new ItemStack(Items.BONE_MEAL.getItem(), 48), ItemStack.EMPTY, 96, 4, 1));
-            event.getTrades().get(5).add(new NukeTradeMoneyForThing(new ItemStack(Items.BONE_MEAL.getItem(), 64), ItemStack.EMPTY, 128, 4, 1));
+            baseCost = 4;
+            baseRewards = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeMoneyForThing(new ItemStack(Items.BONE_MEAL, wantedCount), ItemStack.EMPTY, rewardCount, baseMaxUses, baseXPValue));
+            }
         }
     }
-    
+
+    // Putting this part of the villager trades on hold as there is no easy way to selectively delete trades
     private static VillagerTradesEvent DeleteEmeraldTrades(VillagerTradesEvent event) {
         // spin through all the trades and if there is an emerald in it, delete it
-        for (Int2ObjectMap<List<VillagerTrades.ITrade>> : event.getTrades()) {
+        /*for (Int2ObjectMap<List<?>> : event.getTrades()) {
             
         }
+        for (int i=1; i<= event.getTrades().size(); i++) {
+            for (int ii=1; i<= event.getTrades().get(i).size(); ii++) {
+                VillagerTrades.ITrade inTrade = event.getTrades().get(i).get(ii);
+                if (inTrade. == Items.EMERALD || )
+            }
+        }*/
+        return event;
+    }
+
+    // Villager Trades Money For Things (Buys stuff with money) - Not sure if/when this will be used but while I'm here...
+    protected void addNewTrade(VillagerTradesEvent event, int inVillagerLevel, Item inWantedItem, int inWantedCount, int inReward, int inMaxUses, int inXPValue) {
+        this.addNewTrade(event, inVillagerLevel, new ItemStack(inWantedItem, inWantedCount), inReward, inMaxUses, inXPValue);
+    }
+    protected void addNewTrade(VillagerTradesEvent event, int inVillagerLevel, ItemStack inWantedStack, int inReward, int inMaxUses, int inXPValue) {
+        this.addNewTrade(event, inVillagerLevel, inWantedStack, ItemStack.EMPTY, inReward, inMaxUses, inXPValue);
+    }
+    protected void addNewTrade(VillagerTradesEvent event, int inVillagerLevel, ItemStack inWantedStack, ItemStack inWantedStack2, int inReward, int inMaxUses, int inXPValue) {
+        event.getTrades().get(inVillagerLevel).add(new NukeTradeMoneyForThing(inWantedStack, inWantedStack2, inReward, inMaxUses, inXPValue));
+    }
+    // Villager Trades Things For Money
+    protected void addNewTrade(VillagerTradesEvent event, int inVillagerLevel, int inWanted, Item inRewardItem, int inRewardCount, int inMaxUses, int inXPValue) {
+        this.addNewTrade(event, inVillagerLevel, inWanted, new ItemStack(inRewardItem, inRewardCount), inMaxUses, inXPValue);
+    }
+    protected void addNewTrade(VillagerTradesEvent event, int inVillagerLevel, int inWanted, ItemStack inRewardStack, int inMaxUses, int inXPValue) {
+        event.getTrades().get(inVillagerLevel).add(new NukeTradeThingForMoney(inWanted, inRewardStack, inMaxUses, inXPValue));
+    }
+    // Villager Trades Things for Things
+    protected void addNewTrade(VillagerTradesEvent event, int inVillagerLevel, ItemStack inWanted, ItemStack inRewardStack, int inMaxUses, int inXPValue) {
+        this.addNewTrade(event, inVillagerLevel, inWanted, ItemStack.EMPTY, inRewardStack, inMaxUses, inXPValue);
+    }
+    protected void addNewTrade(VillagerTradesEvent event, int inVillagerLevel, ItemStack inWanted, ItemStack inWanted2, ItemStack inRewardStack, int inMaxUses, int inXPValue) {
+        event.getTrades().get(inVillagerLevel).add(new NukeTradeThingForThing(inWanted, inWanted2, inRewardStack, inMaxUses, inXPValue));
     }
 }
 

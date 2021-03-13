@@ -1,8 +1,10 @@
-package com.nuke3dtv.nukesecon.blocks;
+package com.nuke3dtv.nukesecon.items;
 
+import com.nuke3dtv.nukesecon.blocks.StrongBoxTile;
 import com.nuke3dtv.nukesecon.capabilities.CapabilityNukeLock;
 import com.nuke3dtv.nukesecon.capabilities.DefaultNukeLock;
 import com.nuke3dtv.nukesecon.capabilities.INukeLock;
+import com.nuke3dtv.nukesecon.capabilities.WalletInventoryProvider;
 import com.nuke3dtv.nukesecon.setup.Registration;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -10,30 +12,28 @@ import net.minecraft.inventory.container.ClickType;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.IntReferenceHolder;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class StrongBoxContainer extends Container {
+public class WalletContainer extends Container {
 
-    private TileEntity tileEntity;
     private PlayerEntity playerEntity;
     private IItemHandler playerInventory;
+    private WalletInventoryProvider walletProvider;
 
-    public StrongBoxContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
-        super(Registration.STRONGBOX_CONTAINER.get(), windowId);
-        tileEntity = world.getTileEntity(pos);
+    public WalletContainer(int windowId, World world, PlayerInventory playerInventory, PlayerEntity player, WalletInventoryProvider inProvider) {
+        super(Registration.WALLET_CONTAINER.get(), windowId);
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
+        this.walletProvider = inProvider;
 
-        if (tileEntity != null) {
-            tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
+        if (walletProvider != null) {
+            walletProvider.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
                 addSlot(new SlotItemHandler(h, 0, 135, 45));  // Key In
                 addSlot(new SlotItemHandler(h, 1, 153, 45));  // Key Out
                 addSlot(new SlotItemHandler(h, 2, 9, 23));  // Coin deposit

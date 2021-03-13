@@ -2,6 +2,7 @@ package com.nuke3dtv.nukesecon.setup;
 
 import com.nuke3dtv.nukesecon.NukesEcon;
 import com.nuke3dtv.nukesecon.blocks.StrongBoxScreen;
+import com.nuke3dtv.nukesecon.items.WalletScreen;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,6 +16,7 @@ public class ClientSetup {
 
     public static void init(final FMLClientSetupEvent event) {
         ScreenManager.registerFactory(Registration.STRONGBOX_CONTAINER.get(), StrongBoxScreen::new);
+        ScreenManager.registerFactory(Registration.WALLET_CONTAINER.get(), WalletScreen::new);
     }
 
     @SubscribeEvent

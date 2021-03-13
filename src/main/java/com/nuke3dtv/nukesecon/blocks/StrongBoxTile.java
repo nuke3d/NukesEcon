@@ -1,17 +1,14 @@
 package com.nuke3dtv.nukesecon.blocks;
 
-import com.nuke3dtv.nukesecon.data.CapabilityNukeLock;
-import com.nuke3dtv.nukesecon.data.DefaultNukeLock;
-import com.nuke3dtv.nukesecon.data.INukeLock;
-import com.nuke3dtv.nukesecon.data.NukeLockProvider;
-import com.nuke3dtv.nukesecon.items.StrongboxKey;
-import com.nuke3dtv.nukesecon.setup.Config;
+import com.nuke3dtv.nukesecon.capabilities.CapabilityNukeLock;
+import com.nuke3dtv.nukesecon.capabilities.DefaultNukeLock;
+import com.nuke3dtv.nukesecon.capabilities.INukeLock;
+import com.nuke3dtv.nukesecon.capabilities.CoinWallet;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.world.Explosion;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.util.LazyOptional;
@@ -40,7 +37,8 @@ public class StrongBoxTile extends TileEntity {
     private Random ran = new Random();
 
     // This holds the amount of coins we have in the StrongBox
-    private int coin;
+    // Making this public to expose its methods/functions
+    public CoinWallet wallet = new CoinWallet(0);
 
     public StrongBoxTile() {
         super(STRONGBOX_TILE.get());
@@ -60,7 +58,7 @@ public class StrongBoxTile extends TileEntity {
         itemHandler.deserializeNBT(tag.getCompound("inv"));
         nukeHandler.deserializeNBT(tag.getCompound("nukelock"));
 
-        coin = tag.getInt("coin");
+        wallet.SetBalance(tag.getInt("coin"));
 
         super.read(state, tag);
     }
@@ -70,7 +68,7 @@ public class StrongBoxTile extends TileEntity {
         tag.put("inv", itemHandler.serializeNBT());
         tag.put("nukelock", nukeHandler.serializeNBT());
 
-        tag.putInt("coin", coin);
+        tag.putInt("coin", wallet.GetBalance());
         return super.write(tag);
     }
 
@@ -159,77 +157,29 @@ public class StrongBoxTile extends TileEntity {
       return super.getCapability(cap, side);
     }
 
-    // returns number of coins that could not be added
-    public int addCoin(int inCoin, int inCoinValue, boolean simulate) {
-        int coinsBack = addCoin(inCoin * inCoinValue, simulate);
-        if (coinsBack == 0) { return 0; }
-        // If not all coins could be added, be sure to return any that is too small for current coin value
-        int amtBack = coinsBack % inCoinValue;
-        if (amtBack > 0) addCoin(amtBack, simulate);
-        return coinsBack / inCoinValue;
-    }
     // returns amount that could not be added
-    public int addCoin(int inCoin, boolean simulate) {
-        int newCoin = coin;
-        newCoin += inCoin;
-
-        if((inCoin + newCoin) > Config.STRONGBOX_MAXCOINS.get()) {
-            int retVal = newCoin - Config.STRONGBOX_MAXCOINS.get();
-            newCoin = Config.STRONGBOX_MAXCOINS.get();
-            if (simulate == false) {
-                coin = newCoin;
-                markDirty();
-            }
-            return retVal;
-        } else {
-            if (simulate == false) {
-                coin = newCoin;
-                markDirty();
-            }
-            return 0;
-        }
+    public int addCoin(int inCoin) {
+        int coinBack = wallet.AddToBalance(inCoin);
+        if (coinBack != inCoin) { markDirty(); }
+        return coinBack;
     }
 
     // getCoin will return the full amount of coins or whatever amount it could return based on what is in the StrongBox
-    public int getCoin(int inCoin, int inCoinValue, boolean simulate) {
-        int amtWithdrawn = getCoin(inCoin * inCoinValue, simulate);
-        if (amtWithdrawn == 0) { return 0; }
-        // return any that is too small for the current coin value
-        int amtBack = amtWithdrawn % inCoinValue;
-        if (amtBack > 0) addCoin(amtBack, simulate);
-        return amtWithdrawn / inCoinValue;
-    }
-    public int getCoin(int inCoin, boolean simulate) {
-        if((coin - inCoin) < 0) {
-            int retVal = coin;
-            if (simulate == false) {
-                coin = 0;
-                markDirty();
-            }
-            return retVal;
-        } else {
-            if (simulate == false) {
-                coin -= inCoin;
-                markDirty();
-            }
-            return inCoin;
-        }
+    public int getCoin(int inCoin) {
+        int coinBack = wallet.SubFromBalance(inCoin);
+        if (coinBack > 0) { markDirty(); }
+        return coinBack;
     }
 
     private ItemStack acceptStack(ItemStack stack) {
-        int coinStart = coin;
-        if (stack.getItem() == WOODCOIN.get()) { coin += WOODCOIN.get().GetCoinValue() * stack.getCount(); }
-        if (stack.getItem() == IRONCOIN.get()) { coin += IRONCOIN.get().GetCoinValue() * stack.getCount(); }
-        if (stack.getItem() == COPPERCOIN.get()) { coin += COPPERCOIN.get().GetCoinValue() * stack.getCount(); }
-        if (stack.getItem() == GOLDCOIN.get()) { coin += GOLDCOIN.get().GetCoinValue() * stack.getCount(); }
-        if (stack.getItem() == DIAMONDCOIN.get()) { coin += DIAMONDCOIN.get().GetCoinValue() * stack.getCount(); }
-        if (stack.getItem() == EMERALDCOIN.get()) { coin += EMERALDCOIN.get().GetCoinValue() * stack.getCount(); }
-        if (coinStart != coin) { markDirty(); }
-        return ItemStack.EMPTY;
+        int coinStart = wallet.GetBalance();
+        stack = wallet.addMoney(stack);
+        if (coinStart != wallet.GetBalance()) { markDirty(); }
+        return stack;
     }
-    public int getCoinValue() { return coin; }
+    public int getCoinValue() { return wallet.GetBalance(); }
     public void setCoinValue(int inCoin) {
-        coin = inCoin;
+        wallet.SetBalance(inCoin);
         markDirty();
     }
 }

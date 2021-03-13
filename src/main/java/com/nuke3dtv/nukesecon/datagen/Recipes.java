@@ -8,6 +8,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
 import net.minecraft.data.ShapedRecipeBuilder;
+import net.minecraft.item.Items;
 import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
@@ -20,6 +21,16 @@ public class Recipes extends RecipeProvider {
 
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shapedRecipe(Registration.WALLET.get())
+                .patternLine("xxx")
+                .patternLine("x#x")
+                .patternLine("xxx")
+                .key('x', Tags.Items.LEATHER)
+                .key('#', Registration.WOODCOIN.get())
+                .setGroup("nukesecon")
+                .addCriterion("leather", InventoryChangeTrigger.Instance.forItems(Items.LEATHER))
+                .build(consumer);
+
         ShapedRecipeBuilder.shapedRecipe(Registration.IRONLOCK.get())
                 .patternLine(" ##")
                 .patternLine(" xx")
