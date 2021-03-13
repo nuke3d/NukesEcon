@@ -72,7 +72,7 @@ public class StrongBox extends Block {
                 // First check player inventory
                 for (int i=0; i <= player.inventory.getSizeInventory(); i++) {
                     INukeLock keyKey = player.inventory.getStackInSlot(i).getCapability(CapabilityNukeLock.NUKELOCK_CAPABILITY).orElse(new DefaultNukeLock());
-                    if (tileLock.getKeyCode() == keyKey.getInverseOf(keyKey.getKeyCode())) {
+                    if (tileLock.getKeyCode() == keyKey.getKeyCode()) {
                         // We found a key and it matches the inverse of our strongbox code! Open the gates!
                         openBox = true;
                         break;

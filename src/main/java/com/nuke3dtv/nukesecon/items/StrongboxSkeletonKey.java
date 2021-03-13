@@ -31,7 +31,7 @@ public class StrongboxSkeletonKey extends Item {
         list.add(new TranslationTextComponent("message.strongbox_skeletonkey"));
         if (Screen.hasShiftDown()) {
             INukeLock keyKey = stack.getCapability(CapabilityNukeLock.NUKELOCK_CAPABILITY).orElse(new DefaultNukeLock());
-            Integer keyCode = keyKey.getInverseOf(keyKey.getKeyCode());
+            Integer keyCode = keyKey.getKeyCode();
             list.add(new StringTextComponent(keyCode.toString()));
         }
     }

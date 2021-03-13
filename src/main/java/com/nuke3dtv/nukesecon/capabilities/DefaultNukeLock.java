@@ -21,20 +21,6 @@ public class DefaultNukeLock implements INukeLock, INBTSerializable<CompoundNBT>
     public int getKeyCode() { return this.keycode; }
 
     @Override
-    public int getInverseOf(int inCode) {
-        int invKey = 0;
-        int subAmt = 0;
-        int compVal = 100000000;
-        for (int i=1; i <= 9; i++) {
-            int compVal1 = (inCode - subAmt) / compVal;
-            invKey += ((9 - compVal1) * compVal);
-            subAmt += (compVal1 * compVal);
-            compVal = compVal / 10;
-        }
-        return invKey;
-    }
-
-    @Override
     public void setLocked(boolean inLocked) {
         locked = inLocked;
     }
@@ -55,6 +41,12 @@ public class DefaultNukeLock implements INukeLock, INBTSerializable<CompoundNBT>
     }
 
     @Override
+    public boolean testLock(int inCode) {
+        if (inCode == keycode) return true;
+        return false;
+    }
+
+    @Override
     public CompoundNBT serializeNBT() {
         CompoundNBT tag = new CompoundNBT();
         tag.putInt("keycode", getKeyCode());
@@ -69,4 +61,17 @@ public class DefaultNukeLock implements INukeLock, INBTSerializable<CompoundNBT>
         setLocked(nbt.getBoolean("locked"));
         setSkeleton(nbt.getBoolean("skeleton"));
     }
+    public int getInverseOf(int inCode) {
+        int invKey = 0;
+        int subAmt = 0;
+        int compVal = 100000000;
+        for (int i=1; i <= 9; i++) {
+            int compVal1 = (inCode - subAmt) / compVal;
+            invKey += ((9 - compVal1) * compVal);
+            subAmt += (compVal1 * compVal);
+            compVal = compVal / 10;
+        }
+        return invKey;
+    }
+
 }
