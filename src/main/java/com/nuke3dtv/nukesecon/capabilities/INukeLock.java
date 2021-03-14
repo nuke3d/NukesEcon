@@ -2,6 +2,7 @@ package com.nuke3dtv.nukesecon.capabilities;
 
 public interface INukeLock {
 
+    int generateKeyCode();
     void setKeyCode(int newCode);
     int getKeyCode();
     void setLocked(boolean inLocked); // setLocked on a key means KeyCode cannot be overwritten, on a lock means it is locked
@@ -14,5 +15,5 @@ public interface INukeLock {
 
     // It is recommended that implementations also have a boolean testLock(INukelock inLock) overload as well,
     // but just having the basic testLock will suffice
-    boolean testLock(int inCode);
+    boolean testLock(INukeLock inLock);
 }

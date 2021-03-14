@@ -3,13 +3,27 @@ package com.nuke3dtv.nukesecon.capabilities;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 
+import java.util.Random;
+
 public class DefaultNukeLock implements INukeLock, INBTSerializable<CompoundNBT> {
     private int keycode;
     private boolean locked;
     private boolean skeleton;
 
+    private Random ran = new Random();
+
     public DefaultNukeLock() {
-        // Nothing to do here yet
+        setKeyCode(generateKeyCode());
+    }
+    public DefaultNukeLock(int inKeyCode) {
+        setKeyCode(inKeyCode);
+    }
+
+    @Override
+    public int generateKeyCode() {
+        // A zero keycode will never be generated with this code
+        // This can be useful because forcing a keycode of zero on a key will make a key that will never unlock anything
+        return ran.nextInt(1000000000)+1;
     }
 
     @Override
@@ -41,8 +55,8 @@ public class DefaultNukeLock implements INukeLock, INBTSerializable<CompoundNBT>
     }
 
     @Override
-    public boolean testLock(int inCode) {
-        if (inCode == keycode) return true;
+    public boolean testLock(INukeLock inLock) {
+        if (inLock.getKeyCode() == keycode) return true;
         return false;
     }
 
