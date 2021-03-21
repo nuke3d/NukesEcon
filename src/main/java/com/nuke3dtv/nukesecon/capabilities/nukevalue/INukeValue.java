@@ -1,4 +1,4 @@
-package com.nuke3dtv.nukesecon.capabilities;
+package com.nuke3dtv.nukesecon.capabilities.nukevalue;
 
 /*
     This interface describes a method of saving value to an object. This grew from being a way to add/change
@@ -7,8 +7,11 @@ package com.nuke3dtv.nukesecon.capabilities;
     or NPC trading possible.)
 */
 
-public interface INukeValue {
-    int getValue();
+import java.math.BigInteger;
 
-    void setValue(int inValue);
+public interface INukeValue {
+
+    Long getNukevalue();
+
+    void setNukevalue(Long inValue);
 }

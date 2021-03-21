@@ -1,8 +1,8 @@
 package com.nuke3dtv.nukesecon.blocks;
 
-import com.nuke3dtv.nukesecon.capabilities.CapabilityNukeLock;
-import com.nuke3dtv.nukesecon.capabilities.DefaultNukeLock;
-import com.nuke3dtv.nukesecon.capabilities.INukeLock;
+import com.nuke3dtv.nukesecon.capabilities.nukelock.CapabilityNukeLock;
+import com.nuke3dtv.nukesecon.capabilities.nukelock.DefaultNukeLock;
+import com.nuke3dtv.nukesecon.capabilities.nukelock.INukeLock;
 import com.nuke3dtv.nukesecon.setup.Registration;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -1,4 +1,4 @@
-package com.nuke3dtv.nukesecon.capabilities;
+package com.nuke3dtv.nukesecon.capabilities.nukelock;
 
 import com.nuke3dtv.nukesecon.NukesEcon;
 import net.minecraft.entity.CreatureEntity;

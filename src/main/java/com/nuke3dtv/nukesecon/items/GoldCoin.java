@@ -1,9 +1,11 @@
 package com.nuke3dtv.nukesecon.items;
 
+import com.nuke3dtv.nukesecon.capabilities.nukevalue.NukeValueProvider;
 import com.nuke3dtv.nukesecon.setup.ModSetup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -13,14 +15,10 @@ import java.util.List;
 
 public class GoldCoin extends Item {
 
-    private static int defaultValue = 1000;
-    private int coinValue;
-
     public GoldCoin() {
         super(new Item.Properties()
                 .maxStackSize(64)
                 .group(ModSetup.ITEM_GROUP));
-        coinValue = defaultValue;
     }
 
     @Override
@@ -28,7 +26,10 @@ public class GoldCoin extends Item {
         list.add(new TranslationTextComponent("message.goldcoin"));
     }
 
-    public int GetCoinValue () {
-        return coinValue;
+    @Override
+    public net.minecraftforge.common.capabilities.ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt)
+    {
+        // Values are hard coded for now, but this should be moved to config
+        return new NukeValueProvider(10000L);
     }
 }

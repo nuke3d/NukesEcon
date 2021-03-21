@@ -1,6 +1,8 @@
 package com.nuke3dtv.nukesecon.capabilities;
 
 
+import com.nuke3dtv.nukesecon.capabilities.nukevalue.CapabilityNukeValue;
+import com.nuke3dtv.nukesecon.capabilities.nukevalue.DefaultNukeValue;
 import com.nuke3dtv.nukesecon.setup.Config;
 import com.nuke3dtv.nukesecon.setup.Registration;
 import net.minecraft.item.Item;
@@ -106,16 +108,9 @@ public class CoinWallet {
     // Utility methods to get the individual coin values of items and stacks
     // These could be expanded to get the value of non-coin items once that system is added
     public int GetCoinValue(ItemStack inStack) {
-        return GetCoinValue(inStack.getItem());
+        return inStack.getCapability(CapabilityNukeValue.NUKEVALUE_CAPABILITY).orElse(new DefaultNukeValue(0)).getNukevalue();
     }
     public int GetCoinValue(Item inItem) {
-        int coinValue = 0;
-        if (inItem == Registration.WOODCOIN.get()) coinValue = Registration.WOODCOIN.get().GetCoinValue();
-        if (inItem == Registration.IRONCOIN.get()) coinValue = Registration.IRONCOIN.get().GetCoinValue();
-        if (inItem == Registration.COPPERCOIN.get()) coinValue = Registration.COPPERCOIN.get().GetCoinValue();
-        if (inItem == Registration.GOLDCOIN.get()) coinValue = Registration.GOLDCOIN.get().GetCoinValue();
-        if (inItem == Registration.DIAMONDCOIN.get()) coinValue = Registration.DIAMONDCOIN.get().GetCoinValue();
-        if (inItem == Registration.EMERALDCOIN.get()) coinValue = Registration.EMERALDCOIN.get().GetCoinValue();
-        return coinValue;
+        return GetCoinValue(new ItemStack(inItem, 1));
     }
 }

@@ -1,7 +1,8 @@
 package com.nuke3dtv.nukesecon.setup;
 
 import com.nuke3dtv.nukesecon.NukesEcon;
-import com.nuke3dtv.nukesecon.capabilities.CapabilityNukeLock;
+import com.nuke3dtv.nukesecon.capabilities.nukelock.CapabilityNukeLock;
+import com.nuke3dtv.nukesecon.capabilities.nukevalue.CapabilityNukeValue;
 import com.nuke3dtv.nukesecon.network.Networking;
 import com.nuke3dtv.nukesecon.villager.VillagerTradeHandler;
 import net.minecraft.item.ItemGroup;
@@ -23,6 +24,7 @@ public class ModSetup {
     public static void init(final FMLCommonSetupEvent event) {
         Networking.registerMessages();
         CapabilityNukeLock.register();
+        CapabilityNukeValue.register();
 
         MinecraftForge.EVENT_BUS.addListener(VillagerTradeHandler::onVillagerTradesEvent);
         //MinecraftForge.EVENT_BUS.addListener(NukeLockEventHandler::onAttachCapabilitiesEvent);

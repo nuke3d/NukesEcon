@@ -13,23 +13,23 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class CopperCoin extends Item {
+public class ObsidianCoin extends Item {
 
-    public CopperCoin() {
-        super(new Item.Properties()
+    public ObsidianCoin() {
+        super(new Properties()
                 .maxStackSize(64)
                 .group(ModSetup.ITEM_GROUP));
     }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> list, ITooltipFlag flags) {
-        list.add(new TranslationTextComponent("message.coppercoin"));
+        list.add(new TranslationTextComponent("message.obsidiancoin"));
     }
 
     @Override
     public net.minecraftforge.common.capabilities.ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt)
     {
         // Values are hard coded for now, but this should be moved to config
-        return new NukeValueProvider(100L);
+        return new NukeValueProvider(1000000L);
     }
 }

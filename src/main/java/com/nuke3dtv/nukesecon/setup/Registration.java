@@ -66,6 +66,7 @@ public class Registration {
     public static final RegistryObject<IronCoin> IRONCOIN = ITEMS.register("ironcoin", IronCoin::new);
     public static final RegistryObject<CopperCoin> COPPERCOIN = ITEMS.register("coppercoin", CopperCoin::new);
     public static final RegistryObject<GoldCoin> GOLDCOIN = ITEMS.register("goldcoin", GoldCoin::new);
+    public static final RegistryObject<ObsidianCoin> OBSIDIANCOIN = ITEMS.register("obsidiancoin", ObsidianCoin::new);
     public static final RegistryObject<DiamondCoin> DIAMONDCOIN = ITEMS.register("diamondcoin", DiamondCoin::new);
     public static final RegistryObject<EmeraldCoin> EMERALDCOIN = ITEMS.register("emeraldcoin", EmeraldCoin::new);
     public static final RegistryObject<Wallet> WALLET = ITEMS.register("wallet", Wallet::new);

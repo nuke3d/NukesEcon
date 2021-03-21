@@ -73,7 +73,7 @@ public class VillagerTradeHandler {
                 int rewardCount = baseRewards * i;
                 event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.IRON_BOOTS, rewardCount), baseMaxUses, baseXPValue));
             }
-            // Money for Iron Ingots
+            // Villager buys Iron Ingots for Money
             baseCost = 10;
             baseRewards = 25;
             for (int i=1; i<=5; i++) {
@@ -82,6 +82,111 @@ public class VillagerTradeHandler {
                 event.getTrades().get(i).add(new NukeTradeMoneyForThing(new ItemStack(Items.IRON_INGOT, wantedCount), ItemStack.EMPTY, rewardCount, baseMaxUses, baseXPValue));
             }
         }
+        // BUTCHER
+        if (event.getType() == VillagerProfession.BUTCHER) {
+            // Delete Emerald Trades
+            if (deleteEmeralds) { DeleteEmeraldTrades(event); }
+
+            //Rabbit for Money
+            baseCost = 10 ; // base number of items to trade per trade
+            baseRewards = 4; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.RABBIT, rewardCount), baseMaxUses, baseXPValue));
+            }
+            //Beef for Money
+            baseCost = 10 ; // base number of items to trade per trade
+            baseRewards = 4; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.BEEF, rewardCount), baseMaxUses, baseXPValue));
+            }
+            //Chicken for Money
+            baseCost = 10 ; // base number of items to trade per trade
+            baseRewards = 4; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.CHICKEN, rewardCount), baseMaxUses, baseXPValue));
+            }
+            //Pork for Money
+            baseCost = 10 ; // base number of items to trade per trade
+            baseRewards = 4; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.PORKCHOP, rewardCount), baseMaxUses, baseXPValue));
+            }
+            //Leather for Money
+            baseCost = 5 ; // base number of items to trade per trade
+            baseRewards = 2; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.RABBIT_HIDE, rewardCount), baseMaxUses, baseXPValue));
+            }
+            //Leather for Money
+            baseCost = 5 ; // base number of items to trade per trade
+            baseRewards = 2; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.LEATHER, rewardCount), baseMaxUses, baseXPValue));
+            }
+        }
+
+        // CARTOGRAPHER
+        if (event.getType() == VillagerProfession.CARTOGRAPHER) {
+            //Paper for Money
+            baseCost = 10 ; // base number of items to trade per trade
+            baseRewards = 4; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.PAPER, rewardCount), baseMaxUses, baseXPValue));
+            }
+            //Map for Money
+            baseCost = 10 ; // base number of items to trade per trade
+            baseRewards = 1; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.PAPER, rewardCount), baseMaxUses, baseXPValue));
+            }
+        }
+
+        // CLERIC
+        if (event.getType() == VillagerProfession.CLERIC) {
+            // Ender Pearl
+            baseCost = 1000 ; // base number of items to trade per trade
+            baseRewards = 1; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.PAPER, rewardCount), baseMaxUses, baseXPValue));
+            }
+        }
+
         // FARMER
         if (event.getType() == VillagerProfession.FARMER) {
             // Delete Emerald Trades
@@ -104,6 +209,98 @@ public class VillagerTradeHandler {
                 int wantedCount = baseCost * i;
                 int rewardCount = baseRewards * i;
                 event.getTrades().get(i).add(new NukeTradeMoneyForThing(new ItemStack(Items.BONE_MEAL, wantedCount), ItemStack.EMPTY, rewardCount, baseMaxUses, baseXPValue));
+            }
+        }
+
+        // FISHERMAN
+        if (event.getType() == VillagerProfession.FISHERMAN) {
+            // cod
+            baseCost = 10 ; // base number of items to trade per trade
+            baseRewards = 4; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.COD, rewardCount), baseMaxUses, baseXPValue));
+            }
+            // salmon
+            baseCost = 10 ; // base number of items to trade per trade
+            baseRewards = 4; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.SALMON, rewardCount), baseMaxUses, baseXPValue));
+            }
+        }
+
+        // FLETCHER
+        if (event.getType() == VillagerProfession.FLETCHER) {
+            // bow
+            baseCost = 50 ; // base number of items to trade per trade
+            baseRewards = 1; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.SALMON, rewardCount), baseMaxUses, baseXPValue));
+            }
+            // arrows
+            baseCost = 32 ; // base number of items to trade per trade
+            baseRewards = 32; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.SALMON, rewardCount), baseMaxUses, baseXPValue));
+            }
+        }
+
+        // LEATHERWORKER
+        if (event.getType() == VillagerProfession.LEATHERWORKER) {
+            // Leather Cap for Money
+            baseCost = 40 ; // base number of items to trade per trade
+            baseRewards = 1; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.LEATHER_HELMET, rewardCount), baseMaxUses, baseXPValue));
+            }
+            // Leather Chestplate for Money
+            baseCost = 80 ; // base number of items to trade per trade
+            baseRewards = 1; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.LEATHER_CHESTPLATE, rewardCount), baseMaxUses, baseXPValue));
+            }
+            // Leather Leggings for Money
+            baseCost = 70 ; // base number of items to trade per trade
+            baseRewards = 1; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.LEATHER_LEGGINGS, rewardCount), baseMaxUses, baseXPValue));
+            }
+            // Leather Boots for Money
+            baseCost = 40 ; // base number of items to trade per trade
+            baseRewards = 1; // multiplier for number of items wanted to items rewarded
+            baseMaxUses = 4;
+            baseXPValue = 1;
+            for (int i=1; i<=5; i++) {
+                int wantedCount = baseCost * i;
+                int rewardCount = baseRewards * i;
+                event.getTrades().get(i).add(new NukeTradeThingForMoney(wantedCount, new ItemStack(Items.LEATHER_BOOTS, rewardCount), baseMaxUses, baseXPValue));
             }
         }
     }
@@ -173,6 +370,7 @@ class NukeTradeThingForThing implements VillagerTrades.ITrade {
     }
 }
 
+// Villager will sell thing(reward) for Money(trade)
 class NukeTradeThingForMoney implements VillagerTrades.ITrade {
     private final ItemStack tradeStack1;
     private final ItemStack tradeStack2;
@@ -261,6 +459,7 @@ class NukeTradeThingForMoney implements VillagerTrades.ITrade {
     }
 }
 
+// Villager will buy something with money
 class NukeTradeMoneyForThing implements VillagerTrades.ITrade {
     private final ItemStack tradeStack1;
     private final ItemStack tradeStack2;

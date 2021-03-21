@@ -3,17 +3,19 @@ package com.nuke3dtv.nukesecon.capabilities;
 
 import net.minecraft.item.ItemStack;
 
+import java.math.BigInteger;
+
 /*
     This interface describes how to accept, store, and give money as either objects or integer values
  */
 public interface INukeMoney {
 
     ItemStack addMoney(ItemStack inStack);
-    int addMoney(int addCoins);
+    BigInteger addMoney(BigInteger addCoins);
 
     ItemStack getMoney(ItemStack inStack);
-    int getMoney(int subCoins);
+    BigInteger getMoney(BigInteger subCoins);
 
-    int GetBalance();
-    void SetBalance(int newBalance);
+    BigInteger GetBalance();
+    void SetBalance(BigInteger newBalance);
 }

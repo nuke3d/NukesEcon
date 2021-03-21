@@ -1,6 +1,6 @@
 package com.nuke3dtv.nukesecon.items;
 
-import com.nuke3dtv.nukesecon.capabilities.WalletInventoryProvider;
+import com.nuke3dtv.nukesecon.capabilities.WalletProvider;
 import com.nuke3dtv.nukesecon.setup.ModSetup;
 import com.nuke3dtv.nukesecon.capabilities.CoinWallet;
 import net.minecraft.client.util.ITooltipFlag;
@@ -18,7 +18,9 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
@@ -29,16 +31,16 @@ import static com.nuke3dtv.nukesecon.setup.Registration.*;
 
 public class Wallet extends Item {
 
-    //private ItemStackHandler itemHandler = createHandler();
+    private ItemStackHandler itemHandler = createHandler();
 
     // Never create lazy optionals in getCapability. Always place them as fields in the tile entity:
-    //private LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
+    private LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
     public CoinWallet wallet = new CoinWallet(0);
 
     public Wallet() {
         super(new Properties()
-                .maxStackSize(64)
+                .maxStackSize(1)
                 .group(ModSetup.ITEM_GROUP));
     }
 
@@ -67,15 +69,15 @@ public class Wallet extends Item {
             // You can only drop keys in the key slots
             if(slot == 0) return stack.getItem() == STRONGBOX_KEY.get(); // key in
             if(slot == 1) return stack.getItem() == STRONGBOX_KEY.get(); // key out
-            if(slot == 3) return stack.getItem() == WOODCOIN.get();      // wood coin slot
-            if(slot == 4) return stack.getItem() == IRONCOIN.get();      // iron coin slot
-            if(slot == 5) return stack.getItem() == COPPERCOIN.get();    // copper coin slot
-            if(slot == 6) return stack.getItem() == GOLDCOIN.get();      // gold coin slot
+            if(slot == 3) return stack.getItem() == IRONCOIN.get();      // iron coin slot
+            if(slot == 4) return stack.getItem() == COPPERCOIN.get();    // copper coin slot
+            if(slot == 5) return stack.getItem() == GOLDCOIN.get();      // gold coin slot
+            if(slot == 6) return stack.getItem() == OBSIDIANCOIN.get();  // obsidian coin slot
             if(slot == 7) return stack.getItem() == DIAMONDCOIN.get();   // diamond coin slot
             if(slot == 8) return stack.getItem() == EMERALDCOIN.get();   // emerald coin slot
             if(slot == 9) return stack.getItem() == IRONLOCK.get();      // lock slot
             // add coin slot
-            return (stack.getItem() == WOODCOIN.get() || stack.getItem() == IRONCOIN.get() || stack.getItem() == COPPERCOIN.get() || stack.getItem() == GOLDCOIN.get() || stack.getItem() == DIAMONDCOIN.get() || stack.getItem() == EMERALDCOIN.get());
+            return (stack.getItem() == IRONCOIN.get() || stack.getItem() == COPPERCOIN.get() || stack.getItem() == GOLDCOIN.get() || stack.getItem() == OBSIDIANCOIN.get() || stack.getItem() == DIAMONDCOIN.get() || stack.getItem() == EMERALDCOIN.get());
         }
 
         @Nonnull
@@ -83,7 +85,7 @@ public class Wallet extends Item {
         public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
             // handle coin in slot
             if (slot == 3) {
-                if (stack.getItem() != WOODCOIN.get() && stack.getItem() != IRONCOIN.get() && stack.getItem() != COPPERCOIN.get() && stack.getItem() != GOLDCOIN.get() && stack.getItem() != DIAMONDCOIN.get() && stack.getItem() != EMERALDCOIN.get()) {
+                if (stack.getItem() != IRONCOIN.get() && stack.getItem() != COPPERCOIN.get() && stack.getItem() != GOLDCOIN.get() && stack.getItem() != OBSIDIANCOIN.get() && stack.getItem() != DIAMONDCOIN.get() && stack.getItem() != EMERALDCOIN.get()) {
                     return stack;
                 }
             }
@@ -102,7 +104,7 @@ public class Wallet extends Item {
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
-        return new WalletInventoryProvider();
+        return new WalletProvider();
     }
 
     @Override
@@ -120,7 +122,7 @@ public class Wallet extends Item {
 
             @Override
             public Container createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-                return new WalletContainer(i, playerEntity.world, playerInventory, playerEntity);
+                return new WalletContainer(i, playerEntity.world, playerInventory, playerEntity, this  );
             }
         };
 

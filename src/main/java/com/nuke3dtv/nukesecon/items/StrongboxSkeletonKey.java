@@ -1,9 +1,9 @@
 package com.nuke3dtv.nukesecon.items;
 
-import com.nuke3dtv.nukesecon.capabilities.CapabilityNukeLock;
-import com.nuke3dtv.nukesecon.capabilities.DefaultNukeLock;
-import com.nuke3dtv.nukesecon.capabilities.INukeLock;
-import com.nuke3dtv.nukesecon.capabilities.NukeLockProvider;
+import com.nuke3dtv.nukesecon.capabilities.nukelock.CapabilityNukeLock;
+import com.nuke3dtv.nukesecon.capabilities.nukelock.DefaultNukeLock;
+import com.nuke3dtv.nukesecon.capabilities.nukelock.INukeLock;
+import com.nuke3dtv.nukesecon.capabilities.nukelock.NukeLockProvider;
 import com.nuke3dtv.nukesecon.setup.ModSetup;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;

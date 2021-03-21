@@ -1,10 +1,9 @@
 package com.nuke3dtv.nukesecon.tools;
 
-import com.nuke3dtv.nukesecon.capabilities.DefaultNukeLock;
-import com.nuke3dtv.nukesecon.capabilities.INukeLock;
+import com.nuke3dtv.nukesecon.capabilities.nukelock.DefaultNukeLock;
+import com.nuke3dtv.nukesecon.capabilities.nukelock.INukeLock;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +24,10 @@ public class TradeTools {
         TradeObject() {
             tradeLock = new DefaultNukeLock();
         }
-        public List<ItemStack> addToOffered(ItemStack inStack) {
-            return addToOffered(inStack, new DefaultNukeLock(0)); // A zero key generally will not unlock anything except a lock that was explicitly set to zero
+        public List<ItemStack> addOffered(ItemStack inStack) {
+            return addOffered(inStack, new DefaultNukeLock(0)); // A zero key generally will not unlock anything except a lock that was explicitly set to zero
         }
-        public List<ItemStack> addToOffered(ItemStack inStack, INukeLock inLock) {
+        public List<ItemStack> addOffered(ItemStack inStack, INukeLock inLock) {
             if (tradeLock.getLocked()) {
                 if (tradeLock.testLock(inLock)) {
                     offeredList.add(inStack);
@@ -38,11 +37,24 @@ public class TradeTools {
             }
             return offeredList;
         }
-
-        public List<ItemStack> addToWanted(ItemStack inStack) {
-            return addToWanted(inStack, new DefaultNukeLock(0)); // A zero key generally will not unlock anything except a lock that was explicitly set to zero
+        public List<ItemStack> removeOffered(ItemStack inStack) {
+            return removeOffered(inStack, new DefaultNukeLock(0));
         }
-        public List<ItemStack> addToWanted(ItemStack inStack, INukeLock inLock) {
+        public List<ItemStack> removeOffered(ItemStack inStack, INukeLock inLock) {
+            if (tradeLock.getLocked()) {
+                if (tradeLock.testLock(inLock)) {
+                    offeredList.remove(inStack);
+                }
+            } else {
+                offeredList.remove(inStack);
+            }
+            return wantedList;
+        }
+
+        public List<ItemStack> addWanted(ItemStack inStack) {
+            return addWanted(inStack, new DefaultNukeLock(0)); // A zero key generally will not unlock anything except a lock that was explicitly set to zero
+        }
+        public List<ItemStack> addWanted(ItemStack inStack, INukeLock inLock) {
             if (tradeLock.getLocked()) {
                 if (tradeLock.testLock(inLock)) {
                     wantedList.add(inStack);
@@ -52,6 +64,20 @@ public class TradeTools {
             }
             return wantedList;
         }
+        public List<ItemStack> removeWanted(ItemStack inStack) {
+            return removeWanted(inStack, new DefaultNukeLock(0));
+        }
+        public List<ItemStack> removeWanted(ItemStack inStack, INukeLock inLock) {
+            if (tradeLock.getLocked()) {
+                if (tradeLock.testLock(inLock)) {
+                    wantedList.remove(inStack);
+                }
+            } else {
+                wantedList.remove(inStack);
+            }
+            return wantedList;
+        }
+
 
         public void lockTrade() {
             tradeLock.setLocked(true);

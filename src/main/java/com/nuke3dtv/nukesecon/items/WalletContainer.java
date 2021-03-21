@@ -1,10 +1,12 @@
 package com.nuke3dtv.nukesecon.items;
 
 import com.nuke3dtv.nukesecon.blocks.StrongBoxTile;
-import com.nuke3dtv.nukesecon.capabilities.CapabilityNukeLock;
-import com.nuke3dtv.nukesecon.capabilities.DefaultNukeLock;
-import com.nuke3dtv.nukesecon.capabilities.INukeLock;
-import com.nuke3dtv.nukesecon.capabilities.WalletInventoryProvider;
+import com.nuke3dtv.nukesecon.capabilities.WalletProvider;
+import com.nuke3dtv.nukesecon.capabilities.nukelock.CapabilityNukeLock;
+import com.nuke3dtv.nukesecon.capabilities.nukelock.DefaultNukeLock;
+import com.nuke3dtv.nukesecon.capabilities.nukelock.INukeLock;
+import com.nuke3dtv.nukesecon.capabilities.nukevalue.CapabilityNukeValue;
+import com.nuke3dtv.nukesecon.capabilities.nukevalue.DefaultNukeValue;
 import com.nuke3dtv.nukesecon.setup.Registration;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -20,13 +22,15 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
+import static com.nuke3dtv.nukesecon.tools.MathTools.*;
+
 public class WalletContainer extends Container {
 
     private PlayerEntity playerEntity;
     private IItemHandler playerInventory;
-    private WalletInventoryProvider walletProvider;
+    private WalletProvider walletProvider;
 
-    public WalletContainer(int windowId, World world, PlayerInventory playerInventory, PlayerEntity player, WalletInventoryProvider inProvider) {
+    public WalletContainer(int windowId, World world, PlayerInventory playerInventory, PlayerEntity player, WalletProvider inProvider) {
         super(Registration.WALLET_CONTAINER.get(), windowId);
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
@@ -58,23 +62,30 @@ public class WalletContainer extends Container {
     private void trackCoins() {
         // Unfortunately on a dedicated server ints are actually truncated to short so we need
         // to split our integer here (split our 32 bit integer into two 16 bit integers)
+        // UPDATE: Now that I need to track a long, I need more ints.
+        int[] intCoins = longToTwoInts(walletProvider.getCapability(CapabilityNukeValue.NUKEVALUE_CAPABILITY).orElse(new DefaultNukeValue()).getNukevalue());
+        int[] shortCoins1 = intToShortInts(intCoins[0]);
+        int[] shortCoins2 = intToShortInts(intCoins[1]);
         trackInt(new IntReferenceHolder() {
             @Override
+            /*public int get() { return ((StrongBoxTile) tileEntity).wallet.GetBalance() & 0xffff; }*/
             public int get() {
-                return ((StrongBoxTile) tileEntity).wallet.GetBalance() & 0xffff;
+                return shortCoins1[0];
             }
 
             @Override
             public void set(int value) {
+                walletProvider.getCapability(CapabilityNukeValue.NUKEVALUE_CAPABILITY).ifPresent(h -> {
+                    long coinStored = h.getNukevalue() & 0xffff0000;
+                    h.setNukevalue(twoIntsToLong());
+                });
                 int coinStored = ((StrongBoxTile) tileEntity).wallet.GetBalance() & 0xffff0000;
                 ((StrongBoxTile) tileEntity).wallet.SetBalance(coinStored + (value & 0xffff));
             }
         });
         trackInt(new IntReferenceHolder() {
             @Override
-            public int get() {
-                return (((StrongBoxTile) tileEntity).wallet.GetBalance() >> 16) & 0xffff;
-            }
+            public int get() { return shortCoins1[1]; }
 
             @Override
             public void set(int value) {
@@ -174,16 +185,16 @@ public class WalletContainer extends Container {
 
                 ItemStack newStack = ItemStack.EMPTY;
                 if (slotId == 3) {
-                    newStack = new ItemStack(Registration.WOODCOIN.get());
-                }
-                if (slotId == 4) {
                     newStack = new ItemStack(Registration.IRONCOIN.get());
                 }
-                if (slotId == 5) {
+                if (slotId == 4) {
                     newStack = new ItemStack(Registration.COPPERCOIN.get());
                 }
-                if (slotId == 6) {
+                if (slotId == 5) {
                     newStack = new ItemStack(Registration.GOLDCOIN.get());
+                }
+                if (slotId == 6) {
+                    newStack = new ItemStack(Registration.OBSIDIANCOIN.get());
                 }
                 if (slotId == 7) {
                     newStack = new ItemStack(Registration.DIAMONDCOIN.get());
@@ -219,7 +230,7 @@ public class WalletContainer extends Container {
                 }
                 slot.onSlotChange(slotStack, stackReturn);
             } else {
-                if (slotStack.getItem() == Registration.WOODCOIN.get() || slotStack.getItem() == Registration.IRONCOIN.get() || slotStack.getItem() == Registration.COPPERCOIN.get() || slotStack.getItem() == Registration.GOLDCOIN.get() || slotStack.getItem() == Registration.DIAMONDCOIN.get() || slotStack.getItem() == Registration.EMERALDCOIN.get()) {
+                if (slotStack.getItem() == Registration.IRONCOIN.get() || slotStack.getItem() == Registration.COPPERCOIN.get() || slotStack.getItem() == Registration.GOLDCOIN.get() || slotStack.getItem() == Registration.OBSIDIANCOIN.get() ||slotStack.getItem() == Registration.DIAMONDCOIN.get() || slotStack.getItem() == Registration.EMERALDCOIN.get()) {
                     // Try to shift click into drop slot
                     if (!this.mergeItemStack(slotStack, 2, 3, false)) {
                         return ItemStack.EMPTY;

@@ -5,6 +5,7 @@
     "item.nukesecon.ironcoin": "Iron Coin",
     "item.nukesecon.coppercoin": "Copper Coin",
     "item.nukesecon.goldcoin": "Gold Coin",
+    "item.nukesecon.goldcoin": "Obsidian Coin",
     "item.nukesecon.diamondcoin": "Diamond Coin",
     "item.nukesecon.emeraldcoin": "Emerald Coin",
     "block.nukesecon.strongbox": "Strongbox",
@@ -24,6 +25,7 @@
     "message.ironcoin": "Nuke's Economy Iron Coin",
     "message.coppercoin": "Nuke's Economy Copper Coin",
     "message.goldcoin": "Nuke's Economy Gold Coin",
+    "message.obsidian": "Nuke's Economy Obsidian Coin",
     "message.diamondcoin": "Nuke's Economy Diamond Coin",
     "message.emeraldcoin": "Nuke's Economy Emerald Coin",
 

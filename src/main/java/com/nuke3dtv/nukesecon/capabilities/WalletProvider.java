@@ -16,7 +16,10 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class WalletInventoryProvider implements ICapabilityProvider,ICapabilitySerializable<CompoundNBT> {
+/* This will be the provider for all wallets. Will need the following capabilities:
+    NukeValue, NukeLock, ItemHandler
+ */
+public class WalletProvider implements ICapabilityProvider,ICapabilitySerializable<CompoundNBT> {
 
     private final ItemStackHandler handler = new ItemStackHandler(7);
     private final LazyOptional<ItemStackHandler> lazyHandler = LazyOptional.of(() -> handler);
@@ -27,6 +30,7 @@ public class WalletInventoryProvider implements ICapabilityProvider,ICapabilityS
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return lazyHandler.cast();
         };
+        return null;
     }
 
     @Override
