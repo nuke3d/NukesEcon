@@ -66,6 +66,8 @@ public class WalletContainer extends Container {
         int[] intCoins = longToTwoInts(walletProvider.getCapability(CapabilityNukeValue.NUKEVALUE_CAPABILITY).orElse(new DefaultNukeValue()).getNukevalue());
         int[] shortCoins1 = intToShortInts(intCoins[0]);
         int[] shortCoins2 = intToShortInts(intCoins[1]);
+        int[] newIntCoins = new int[2];
+        // Track First Half of long int
         trackInt(new IntReferenceHolder() {
             @Override
             /*public int get() { return ((StrongBoxTile) tileEntity).wallet.GetBalance() & 0xffff; }*/
@@ -75,12 +77,7 @@ public class WalletContainer extends Container {
 
             @Override
             public void set(int value) {
-                walletProvider.getCapability(CapabilityNukeValue.NUKEVALUE_CAPABILITY).ifPresent(h -> {
-                    long coinStored = h.getNukevalue() & 0xffff0000;
-                    h.setNukevalue(twoIntsToLong());
-                });
-                int coinStored = ((StrongBoxTile) tileEntity).wallet.GetBalance() & 0xffff0000;
-                ((StrongBoxTile) tileEntity).wallet.SetBalance(coinStored + (value & 0xffff));
+                newIntCoins[0] = (newIntCoins[0] & 0xffff0000) + (value & 0xffff);
             }
         });
         trackInt(new IntReferenceHolder() {
@@ -89,9 +86,33 @@ public class WalletContainer extends Container {
 
             @Override
             public void set(int value) {
-                int coinStored = ((StrongBoxTile) tileEntity).wallet.GetBalance() & 0x0000ffff;
-                ((StrongBoxTile) tileEntity).wallet.SetBalance(coinStored | (value << 16));
+                newIntCoins[0] = (newIntCoins[0] & 0x0000ffff) | (value << 16);
             }
+        });
+        // Track Second Half of long int
+        trackInt(new IntReferenceHolder() {
+            @Override
+            /*public int get() { return ((StrongBoxTile) tileEntity).wallet.GetBalance() & 0xffff; }*/
+            public int get() {
+                return shortCoins2[0];
+            }
+
+            @Override
+            public void set(int value) {
+                newIntCoins[1] = (newIntCoins[1] & 0xffff0000) + (value & 0xffff);
+            }
+        });
+        trackInt(new IntReferenceHolder() {
+            @Override
+            public int get() { return shortCoins2[1]; }
+
+            @Override
+            public void set(int value) {
+                newIntCoins[1] = (newIntCoins[1] & 0x0000ffff) | (value << 16);
+            }
+        });
+        walletProvider.getCapability(CapabilityNukeValue.NUKEVALUE_CAPABILITY).ifPresent(h -> {
+            h.setNukevalue(twoIntsToLong(newIntCoins));
         });
     }
     // Also setup tracking of keys
